@@ -44,36 +44,36 @@ public class HUD extends DoaObject {
 		final AffineTransform oldTransform = g.getTransform();
 		g.rotate(Math.PI, Main.WIDTH / 2d, Main.HEIGHT / 2d);
 		g.setColor(TRANSLUCENT_GRAY);
-		g.fillRect(windowWidth - 60 - 3d, 50 - 3d, 50 + 6d, Player.getInstance().getHealthMAX() + 6d);
+		g.fillRect(windowWidth - 60 - 3d, 20 - 3d, 50 + 6d, Player.getInstance().getHealthMAX() + 6d);
 		g.setColor(TRANSLUCENT_GREEN);
-		g.fillRect(windowWidth - 60d, 50, 50, Player.getInstance().getHealth());
+		g.fillRect(windowWidth - 60d, 20, 50, Player.getInstance().getHealth());
 		final Stroke oldStroke = g.getStroke();
 		g.setStroke(new BasicStroke(4));
 		g.setColor(TRANSLUCENT_DARK_GREEN);
-		g.drawRect(windowWidth - 60d, 50, 50, Player.getInstance().getHealth());
+		g.drawRect(windowWidth - 60d, 20, 50, Player.getInstance().getHealth());
 		g.setStroke(oldStroke);
 		g.setTransform(oldTransform);
 
 		g.setFont(new Font("Soup of Justice", Font.BOLD, 32));
 
 		g.setColor(GRAY);
-		g.drawString(COINS + Player.getInstance().getCoins(), 69, windowHeight - 111d);
-		g.drawString(COINS + Player.getInstance().getCoins(), 69, windowHeight - 109d);
-		g.drawString(COINS + Player.getInstance().getCoins(), 71, windowHeight - 111d);
-		g.drawString(COINS + Player.getInstance().getCoins(), 71, windowHeight - 109d);
-		g.drawString(LEVEL + EnemySpawner.getDifficulty(), 69, windowHeight - 81d);
-		g.drawString(LEVEL + EnemySpawner.getDifficulty(), 69, windowHeight - 79d);
-		g.drawString(LEVEL + EnemySpawner.getDifficulty(), 71, windowHeight - 81d);
-		g.drawString(LEVEL + EnemySpawner.getDifficulty(), 71, windowHeight - 79d);
-		g.drawString(SCORE + Player.getInstance().getScore(), 69, windowHeight - 51d);
-		g.drawString(SCORE + Player.getInstance().getScore(), 69, windowHeight - 49d);
-		g.drawString(SCORE + Player.getInstance().getScore(), 71, windowHeight - 51d);
-		g.drawString(SCORE + Player.getInstance().getScore(), 71, windowHeight - 49d);
+		g.drawString(COINS + Player.getInstance().getCoins(), 69, windowHeight - 81d);
+		g.drawString(COINS + Player.getInstance().getCoins(), 69, windowHeight - 79d);
+		g.drawString(COINS + Player.getInstance().getCoins(), 71, windowHeight - 81d);
+		g.drawString(COINS + Player.getInstance().getCoins(), 71, windowHeight - 79d);
+		g.drawString(LEVEL + EnemySpawner.getDifficulty(), 69, windowHeight - 51d);
+		g.drawString(LEVEL + EnemySpawner.getDifficulty(), 69, windowHeight - 49d);
+		g.drawString(LEVEL + EnemySpawner.getDifficulty(), 71, windowHeight - 51d);
+		g.drawString(LEVEL + EnemySpawner.getDifficulty(), 71, windowHeight - 49d);
+		g.drawString(SCORE + Player.getInstance().getScore(), 69, windowHeight - 21d);
+		g.drawString(SCORE + Player.getInstance().getScore(), 69, windowHeight - 19d);
+		g.drawString(SCORE + Player.getInstance().getScore(), 71, windowHeight - 21d);
+		g.drawString(SCORE + Player.getInstance().getScore(), 71, windowHeight - 19d);
 
 		g.setColor(ORANGE);
-		g.drawString(COINS + Player.getInstance().getCoins(), 70, windowHeight - 110d);
-		g.drawString(LEVEL + EnemySpawner.getDifficulty(), 70, windowHeight - 80d);
-		g.drawString(SCORE + Player.getInstance().getScore(), 70, windowHeight - 50d);
+		g.drawString(COINS + Player.getInstance().getCoins(), 70, windowHeight - 80d);
+		g.drawString(LEVEL + EnemySpawner.getDifficulty(), 70, windowHeight - 50d);
+		g.drawString(SCORE + Player.getInstance().getScore(), 70, windowHeight - 20d);
 	}
 
 	@Override

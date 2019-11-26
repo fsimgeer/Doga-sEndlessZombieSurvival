@@ -8,16 +8,17 @@ import com.doa.engine.graphics.DoaSprites;
 import com.doa.engine.scene.DoaSceneHandler;
 
 import gameplay.LevelLoader;
+import ui.shop.Shop;
 import util.Builders;
 import util.Sprites;
 
 public class Main {
 
-	public static final int WIDTH = 1280;
-	public static final int HEIGHT = 720;
+	public static final int WIDTH = 1920;
+	public static final int HEIGHT = 1080;
 
-	public static final int INNER_WIDTH = 1264;
-	public static final int INNER_HEIGHT = 681;
+	public static final int INNER_WIDTH = 1920;
+	public static final int INNER_HEIGHT = 1080;
 
 	private static final DoaWindow w = DoaWindow.createWindow();
 	private static final DoaEngine e = new DoaEngine();
@@ -36,13 +37,15 @@ public class Main {
 		Builders.HB.instantiate();
 
 		SwingUtilities.invokeLater(Main::configureGUI);
+		
+		//Shop.show();
 	}
 
 	private static void configureGUI() {
 		w.setTitle("Java Zombie Survival!");
-		w.setSize(WIDTH, HEIGHT);
+		w.setBounds(0, 0, WIDTH, HEIGHT);
+		w.setUndecorated(true);
 		w.setResizable(false);
-		w.setLocationByPlatform(true);
 		w.setVisible(true);
 		w.add(e);
 	}

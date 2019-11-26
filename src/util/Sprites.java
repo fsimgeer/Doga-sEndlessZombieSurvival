@@ -18,6 +18,7 @@ public final class Sprites {
 			DoaSprites.createSpriteFromSpriteSheet("EnemySprite", "/KenneyAssets/Spritesheet/spritesheet_characters.png", new Rectangle(426, 0, 33, 43));
 			DoaSprites.createSprite("map", "/level-test2-bg.png");
 			DoaSprites.createSprite("mapData", "/level-test2.png");
+			DoaSprites.createSprite("UnknownItem", "/SimgeAssets/unknown.png");
 			Font customFont = Font.createFont(Font.TRUETYPE_FONT, Main.class.getResourceAsStream("/sojaAssets/soupofjustice.ttf")).deriveFont(12f);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			ge.registerFont(customFont);

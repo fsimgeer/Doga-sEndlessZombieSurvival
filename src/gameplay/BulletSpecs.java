@@ -10,11 +10,26 @@ public class BulletSpecs {
 	private float velocity = 0;
 	private int cooldown = 0;
 	private float damage = 0;
+	private float spread = 0;
+	private float range = 0;
 
 	private boolean piercing = false;
 	private boolean bouncing = false;
 
 	public BulletSpecs() {}
+
+	public BulletSpecs(int width, int height, Color color, float velocity, int cooldown, float damage, float spread, float range, boolean piercing, boolean bouncing) {
+		this.width = width;
+		this.height = height;
+		this.color = color;
+		this.velocity = velocity;
+		this.cooldown = cooldown;
+		this.damage = damage;
+		this.spread = spread;
+		this.range = range;
+		this.piercing = piercing;
+		this.bouncing = bouncing;
+	}
 
 	public int getWidth() {
 		return width;
@@ -62,6 +77,22 @@ public class BulletSpecs {
 
 	public void setDamage(final float damage) {
 		this.damage = damage;
+	}
+	
+	public void setSpread(final float spread) {
+		this.spread = spread;
+	}
+	
+	public float getSpread() {
+		return spread;
+	}
+	
+	public void setRange(final float range) {
+		this.range = range;
+	}
+	
+	public float getRange() {
+		return range;
 	}
 
 	public boolean isPiercing() {

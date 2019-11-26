@@ -6,7 +6,10 @@ import java.util.Arrays;
 import com.doa.engine.graphics.DoaGraphicsContext;
 import com.doa.engine.scene.DoaSceneHandler;
 import com.doa.engine.task.DoaTasker;
+import com.doa.maths.DoaVectorD;
+import com.doa.maths.DoaVectorF;
 
+import main.Main;
 import util.Builders;
 
 public class Bullet extends TypedGameObject {
@@ -14,20 +17,25 @@ public class Bullet extends TypedGameObject {
 	private static final long serialVersionUID = -4315362367824405514L;
 
 	private transient BulletSpecs bs;
+	DoaVectorF v;
 
 	public Bullet(final Float x, final Float y, final Float mx, final Float my, final BulletSpecs bs) {
 		super(x, y);
 		super.type = ObjectType.PROJECTILE;
-		velocity.x = mx - x;
-		velocity.y = my - y;
+		velocity.x = (float) (mx - x + Math.random() * bs.getSpread());
+		velocity.y = (float) (my - y + Math.random() * bs.getSpread());
+		v = new DoaVectorF(x, y);
 		this.bs = bs;
 		velocity = velocity.normalise().mul(bs.getVelocity());
-		DoaTasker.executeLater(() -> deleteBullet(), 1000);
 	}
 
 	@Override
 	public synchronized void tick() {
 		position.add(velocity);
+		double distanceSquare = Math.pow(position.x - v.x, 2) + Math.pow(position.y - v.y, 2);
+		if(distanceSquare > Math.pow(bs.getRange(), 2)) {
+			deleteBullet();
+		}
 		if (!bs.isBouncing() && Collision.checkCollision(this, ObjectType.OBSTACLE)) {
 			deleteBullet();
 		}

@@ -27,7 +27,7 @@ public class Player extends TypedGameObject {
 	private DoaTaskGuard cooldown = new DoaTaskGuard(true);
 	private double health = 100;
 	private double healthMAX = 100;
-	private int coins = 0;
+	private int coins = 100;
 	private int score = 0;
 	private double angleRad = 0;
 
@@ -43,6 +43,8 @@ public class Player extends TypedGameObject {
 		bs.setCooldown(1000);
 		bs.setVelocity(2f);
 		bs.setDamage(200);
+		bs.setSpread(100);
+		bs.setRange(100);
 		// bs.setPiercing(true);
 	}
 
@@ -107,9 +109,17 @@ public class Player extends TypedGameObject {
 	public BulletSpecs getBulletSpecs() {
 		return bs;
 	}
+	
+	public void setBulletSpecs(BulletSpecs bs) {
+		this.bs =  bs;
+	}
 
 	public int getHealth() {
 		return (int) health;
+	}
+	
+	public void setHealth(int newHealth) {
+		health = newHealth;
 	}
 
 	public int getHealthMAX() {

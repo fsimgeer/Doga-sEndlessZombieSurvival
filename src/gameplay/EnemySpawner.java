@@ -9,7 +9,7 @@ import com.doa.engine.task.DoaTaskGuard;
 import com.doa.engine.task.DoaTasker;
 import com.doa.utils.DoaUtils;
 
-import ui.Shop;
+import ui.shop.Shop;
 import util.Builders;
 
 public class EnemySpawner extends TypedGameObject {

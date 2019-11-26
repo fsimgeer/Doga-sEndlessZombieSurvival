@@ -12,5 +12,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/Doga&apos;sEndlessZombieSurvival/lib/DoaEngine-2.7-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/JDOM/jdom-2.0.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

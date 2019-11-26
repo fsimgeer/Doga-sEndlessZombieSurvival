@@ -9,7 +9,7 @@ import gameplay.Player;
 import gameplay.Wall;
 import ui.HUD;
 import ui.Level;
-import ui.Shop;
+import ui.shop.Shop;
 
 public final class Builders {
 

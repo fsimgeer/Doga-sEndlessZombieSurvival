@@ -39,7 +39,7 @@ public class Main {
 
 		SwingUtilities.invokeLater(Main::configureGUI);
 		
-		//Shop.show();
+		Shop.show();
 	}
 
 	private static void configureGUI() {

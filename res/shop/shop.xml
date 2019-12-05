@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE shop [
+<!ELEMENT shop (tab+)>
+<!ELEMENT tab (tab-name, shop-item+)>
+<!ELEMENT shop-item (item-name, picture, upgrades+)>
+<!ELEMENT upgrades (upgrade+)>
+<!ELEMENT upgrade (upgrade-name+, upgrade-effects+, upgrade-costs+)>
+<!ELEMENT upgrade-effects (effect+)>
+<!ELEMENT upgrade-costs (cost+)>
+<!ELEMENT tab-name (#PCDATA)>
+<!ELEMENT item-name (#PCDATA)>
+<!ELEMENT picture (#PCDATA)>
+<!ELEMENT upgrade-name (#PCDATA)>
+<!ELEMENT effect (#PCDATA)>
+<!ELEMENT cost (#PCDATA)>
+]>
+
+<shop>
+	<tab>
+		<tab-name>Health - Armor</tab-name>
+		<shop-item>
+			<item-name>Max Health Up</item-name>
+			<picture>unknown</picture>
+			<upgrades>
+				<upgrade>
+					<upgrade-name>Max Health: </upgrade-name>
+					<upgrade-effects>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+					</upgrade-effects>
+					<upgrade-costs>
+						<cost>10</cost>
+						<cost>20</cost>
+						<cost>40</cost>
+						<cost>80</cost>
+						<cost>160</cost>
+						<cost>320</cost>
+						<cost>640</cost>
+					</upgrade-costs>
+				</upgrade>
+			</upgrades>
+		</shop-item>
+		<shop-item>
+			<item-name>Heal</item-name>
+			<picture>unknown</picture>
+			<upgrades>
+				<upgrade>
+					<upgrade-name>Health: </upgrade-name>
+					<upgrade-effects>
+						<effect>+50</effect>
+					</upgrade-effects>
+					<upgrade-costs>
+						<cost>10</cost>
+					</upgrade-costs>
+				</upgrade>
+			</upgrades>
+		</shop-item>
+		<shop-item>
+			<item-name>Armor Up</item-name>
+			<picture>unknown</picture>
+			<upgrades>
+				<upgrade>
+					<upgrade-name>Max Health: </upgrade-name>
+					<upgrade-effects>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+					</upgrade-effects>
+					<upgrade-costs>
+						<cost>10</cost>
+						<cost>20</cost>
+						<cost>40</cost>
+						<cost>80</cost>
+						<cost>160</cost>
+						<cost>320</cost>
+						<cost>640</cost>
+					</upgrade-costs>
+				</upgrade>
+			</upgrades>
+		</shop-item>
+		<shop-item>
+			<item-name>Move Speed Up</item-name>
+			<picture>unknown</picture>
+			<upgrades>
+				<upgrade>
+					<upgrade-name>Move Speed: </upgrade-name>
+					<upgrade-effects>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+						<effect>+50</effect>
+					</upgrade-effects>
+					<upgrade-costs>
+						<cost>10</cost>
+						<cost>20</cost>
+						<cost>40</cost>
+						<cost>80</cost>
+						<cost>160</cost>
+						<cost>320</cost>
+						<cost>640</cost>
+					</upgrade-costs>
+				</upgrade>
+			</upgrades>
+		</shop-item>
+	</tab>
+	<tab>
+		<tab-name>Guns</tab-name>
+		<shop-item>
+			<item-name></item-name>
+			<picture>unknown</picture>
+			<upgrades>
+				<upgrade>
+					<upgrade-name></upgrade-name>
+					<upgrade-effects>
+						<effect></effect>
+					</upgrade-effects>
+					<upgrade-costs>
+						<cost></cost>
+					</upgrade-costs>
+				</upgrade>
+			</upgrades>
+		</shop-item>
+	</tab>
+	<tab>
+		<tab-name>Grenade - Beacon</tab-name>
+		<shop-item>
+			<item-name></item-name>
+			<picture>unknown</picture>
+			<upgrades>
+				<upgrade>
+					<upgrade-name></upgrade-name>
+					<upgrade-effects>
+						<effect></effect>
+					</upgrade-effects>
+					<upgrade-costs>
+						<cost></cost>
+					</upgrade-costs>
+				</upgrade>
+			</upgrades>
+		</shop-item>
+	</tab>
+	<tab>
+		<tab-name>Specials</tab-name>
+		<shop-item>
+			<item-name></item-name>
+			<picture>unknown</picture>
+			<upgrades>
+				<upgrade>
+					<upgrade-name></upgrade-name>
+					<upgrade-effects>
+						<effect></effect>
+					</upgrade-effects>
+					<upgrade-costs>
+						<cost></cost>
+					</upgrade-costs>
+				</upgrade>
+			</upgrades>
+		</shop-item>
+	</tab>
+</shop>

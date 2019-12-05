@@ -32,7 +32,7 @@ public class EnemySpawner extends TypedGameObject {
 		super.height = width;
 		super.width = height;
 		super.type = ObjectType.MUTATOR;
-		DoaTasker.executeLater(() -> cooldownGuard.set(true), 1000 + ThreadLocalRandom.current().nextLong(5000));
+		//DoaTasker.executeLater(() -> cooldownGuard.set(true), 1000 + ThreadLocalRandom.current().nextLong(5000));
 	}
 
 	@Override

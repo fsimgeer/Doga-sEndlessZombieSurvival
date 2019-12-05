@@ -1,8 +1,7 @@
 package gameplay;
 
 import java.awt.Color;
-import java.awt.Rectangle;
-import java.awt.geom.AffineTransform;
+import java.awt.Polygon;
 
 import com.doa.engine.DoaCamera;
 import com.doa.engine.graphics.DoaGraphicsContext;
@@ -37,14 +36,14 @@ public class Player extends TypedGameObject {
 		INSTANCE = this;
 		width = (int) (DoaSprites.get("PlayerSprite").getWidth() * SIZE_FACTOR);
 		height = (int) (DoaSprites.get("PlayerSprite").getHeight() * SIZE_FACTOR);
-		bs.setWidth(16);
-		bs.setHeight(16);
+		bs.setWidth(10);
+		bs.setHeight(20);
 		bs.setColor(Color.RED);
 		bs.setCooldown(1000);
 		bs.setVelocity(2f);
 		bs.setDamage(200);
-		bs.setSpread(100);
-		bs.setRange(100);
+		bs.setSpread(0);
+		bs.setRange(10000000);
 		// bs.setPiercing(true);
 	}
 
@@ -74,32 +73,61 @@ public class Player extends TypedGameObject {
 		if (Collision.checkCollision(this, ObjectType.OBSTACLE)) {
 			position.y = oldY;
 		}
+
+		DoaVectorF intVec = new DoaVectorF(DoaCamera.getX() + (float) DoaMouse.X, DoaCamera.getY() + (float) DoaMouse.Y);
+		intVec = position.clone().add(new DoaVectorF(width / 2f, height / 2f)).sub(intVec).normalise();
+		intVec.x *= -1;
+
+		angleRad = Math.atan2(-intVec.y, intVec.x);
+
 		if (DoaMouse.MB1_HOLD && cooldown.get()) {
 			DoaTasker.guard(cooldown, bs.getCooldown());
+
+			DoaVectorF center = new DoaVectorF();
+			Polygon bounds = getBounds();
+			for (int i = 0; i < bounds.npoints; ++i) {
+				center.x += bounds.xpoints[i];
+				center.y += bounds.ypoints[i];
+			}
+			center.mul(1f / bounds.npoints);
+
+			DoaVectorF offset = new DoaVectorF(20, 8);
+			DoaVectorF rotated = offset.rotateRadians(angleRad);
+			DoaVectorF rotatedTranslated = rotated.translate(center.x, center.y);
+
 			final float mx = (float) (DoaMouse.X + DoaCamera.getX());
 			final float my = (float) (DoaMouse.Y + DoaCamera.getY());
-			DoaVectorF bulletStartingPosition = new DoaVectorF(position.x + width / 2f + bs.getWidth() / 2f, position.y + height / 2f + bs.getHeight() / 2f)
-			        .translate(-(position.x + width / 2f), -(position.y + height / 2f)).rotateRadians(angleRad).translate(position.x + width / 2f, position.y + height / 2f);
-			Builders.BB.args(bulletStartingPosition.x - bs.getWidth() / 2f, bulletStartingPosition.y - bs.getHeight() / 2f, mx, my, bs).instantiate();
+			Builders.BB.args(rotatedTranslated.x - bs.getWidth() * .5f, rotatedTranslated.y - bs.getHeight() * .5f, mx, my, bs).instantiate();
 		}
 
 		final TypedGameObject[] touchingEnemies = Collision.getCollidingObjects(this, ObjectType.ENEMY);
 		health -= touchingEnemies.length * 0.2;
-
-		angleRad = Math.atan2(DoaMouse.Y + DoaCamera.getY() - position.y, DoaMouse.X + DoaCamera.getX() - position.x);
 	}
 
 	@Override
 	public void render(final DoaGraphicsContext g) {
-		final AffineTransform oldTransform = g.getTransform();
-		g.rotate(angleRad, position.x + width / 2d, position.y + height / 2d);
+		g.pushTransform();
+		g.rotate(angleRad, position.x + width * .5f, position.y + height * .5f);
 		g.drawImage(DoaSprites.get("PlayerSprite"), position.x, position.y, width, height, null);
-		g.setTransform(oldTransform);
+		g.popTransform();
+		g.draw(getBounds());
 	}
 
 	@Override
-	public Rectangle getBounds() {
-		return new Rectangle((int) position.x - 1, (int) position.y - 1, width - 2, height - 2);
+	public Polygon getBounds() {
+		int[] xp = new int[] { (int) position.x, (int) position.x, (int) position.x + width, (int) position.x + width };
+		int[] yp = new int[] { (int) position.y, (int) position.y + height, (int) position.y + height, (int) position.y };
+		for (int i = 0; i < 0; ++i) {
+			// TODO find a way to accurately represent the bounding box! if i rotate,
+			// collision detection fucks up, if i don't the model and the bounding box doesn't match!
+			DoaVectorF f = new DoaVectorF(xp[i], yp[i]);
+			f.translate(-position.x - width * .5f, -position.y - height * .5f);
+			f.rotateRadians(angleRad);
+			f.translate(position.x + width * .5f, position.y + height * .5f);
+			xp[i] = (int) f.x;
+			yp[i] = (int) f.y;
+		}
+		return new Polygon(xp, yp, 4);
 	}
 
 	public static Player getInstance() {
@@ -109,15 +137,15 @@ public class Player extends TypedGameObject {
 	public BulletSpecs getBulletSpecs() {
 		return bs;
 	}
-	
+
 	public void setBulletSpecs(BulletSpecs bs) {
-		this.bs =  bs;
+		this.bs = bs;
 	}
 
 	public int getHealth() {
 		return (int) health;
 	}
-	
+
 	public void setHealth(int newHealth) {
 		health = newHealth;
 	}

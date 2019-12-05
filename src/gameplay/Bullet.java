@@ -5,11 +5,8 @@ import java.util.Arrays;
 
 import com.doa.engine.graphics.DoaGraphicsContext;
 import com.doa.engine.scene.DoaSceneHandler;
-import com.doa.engine.task.DoaTasker;
-import com.doa.maths.DoaVectorD;
 import com.doa.maths.DoaVectorF;
 
-import main.Main;
 import util.Builders;
 
 public class Bullet extends TypedGameObject {
@@ -22,9 +19,9 @@ public class Bullet extends TypedGameObject {
 	public Bullet(final Float x, final Float y, final Float mx, final Float my, final BulletSpecs bs) {
 		super(x, y);
 		super.type = ObjectType.PROJECTILE;
-		velocity.x = (float) (mx - x + Math.random() * bs.getSpread());
-		velocity.y = (float) (my - y + Math.random() * bs.getSpread());
-		v = new DoaVectorF(x, y);
+		velocity.x = (float) (mx - x + (Math.random() - .5f) * bs.getSpread());
+		velocity.y = (float) (my - y + (Math.random() - .5f) * bs.getSpread());
+		v = position.clone();
 		this.bs = bs;
 		velocity = velocity.normalise().mul(bs.getVelocity());
 	}
@@ -33,7 +30,7 @@ public class Bullet extends TypedGameObject {
 	public synchronized void tick() {
 		position.add(velocity);
 		double distanceSquare = Math.pow(position.x - v.x, 2) + Math.pow(position.y - v.y, 2);
-		if(distanceSquare > Math.pow(bs.getRange(), 2)) {
+		if (distanceSquare > Math.pow(bs.getRange(), 2)) {
 			deleteBullet();
 		}
 		if (!bs.isBouncing() && Collision.checkCollision(this, ObjectType.OBSTACLE)) {
@@ -53,6 +50,7 @@ public class Bullet extends TypedGameObject {
 	@Override
 	public synchronized void render(final DoaGraphicsContext g) {
 		g.setColor(bs.getColor());
+		g.rotate(Math.atan2(velocity.y, velocity.x) + Math.PI / 2, position.x + bs.getWidth() * .5f, position.y + bs.getHeight() * .5f);
 		g.fillOval(position.x, position.y, bs.getWidth(), bs.getHeight());
 	}
 

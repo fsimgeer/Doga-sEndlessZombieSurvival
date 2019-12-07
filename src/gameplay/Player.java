@@ -1,6 +1,5 @@
 package gameplay;
 
-import java.awt.Color;
 import java.awt.Polygon;
 
 import com.doa.engine.DoaCamera;
@@ -12,7 +11,8 @@ import com.doa.engine.task.DoaTaskGuard;
 import com.doa.engine.task.DoaTasker;
 import com.doa.maths.DoaVectorF;
 
-import util.Builders;
+import gameplay.weapon.IWeapon;
+import gameplay.weapon.Weapons;
 
 public class Player extends TypedGameObject {
 
@@ -22,7 +22,8 @@ public class Player extends TypedGameObject {
 
 	private static Player INSTANCE = null;
 
-	private transient BulletSpecs bs = new BulletSpecs();
+	private IWeapon w = Weapons.Shotgun;
+
 	private DoaTaskGuard cooldown = new DoaTaskGuard(true);
 	private double health = 100;
 	private double healthMAX = 100;
@@ -36,15 +37,6 @@ public class Player extends TypedGameObject {
 		INSTANCE = this;
 		width = (int) (DoaSprites.get("PlayerSprite").getWidth() * SIZE_FACTOR);
 		height = (int) (DoaSprites.get("PlayerSprite").getHeight() * SIZE_FACTOR);
-		bs.setWidth(10);
-		bs.setHeight(20);
-		bs.setColor(Color.RED);
-		bs.setCooldown(1000);
-		bs.setVelocity(2f);
-		bs.setDamage(200);
-		bs.setSpread(0);
-		bs.setRange(10000000);
-		// bs.setPiercing(true);
 	}
 
 	@Override
@@ -81,7 +73,7 @@ public class Player extends TypedGameObject {
 		angleRad = Math.atan2(-intVec.y, intVec.x);
 
 		if (DoaMouse.MB1_HOLD && cooldown.get()) {
-			DoaTasker.guard(cooldown, bs.getCooldown());
+			DoaTasker.guard(cooldown, (long) (1000f / w.getAttackSpeed()));
 
 			DoaVectorF center = new DoaVectorF();
 			Polygon bounds = getBounds();
@@ -97,7 +89,7 @@ public class Player extends TypedGameObject {
 
 			final float mx = (float) (DoaMouse.X + DoaCamera.getX());
 			final float my = (float) (DoaMouse.Y + DoaCamera.getY());
-			Builders.BB.args(rotatedTranslated.x - bs.getWidth() * .5f, rotatedTranslated.y - bs.getHeight() * .5f, mx, my, bs).instantiate();
+			w.fire(rotatedTranslated.x - w.getDimensions().getCenterX(), rotatedTranslated.y - w.getDimensions().getCenterY(), new DoaVectorF(mx, my));
 		}
 
 		final TypedGameObject[] touchingEnemies = Collision.getCollidingObjects(this, ObjectType.ENEMY);
@@ -134,12 +126,12 @@ public class Player extends TypedGameObject {
 		return INSTANCE;
 	}
 
-	public BulletSpecs getBulletSpecs() {
-		return bs;
+	public IWeapon getWeapon() {
+		return w;
 	}
 
-	public void setBulletSpecs(BulletSpecs bs) {
-		this.bs = bs;
+	public void setWeapon(IWeapon w) {
+		this.w = w;
 	}
 
 	public int getHealth() {

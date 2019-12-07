@@ -9,9 +9,10 @@ import com.doa.engine.graphics.DoaGraphicsContext;
 import com.doa.engine.input.DoaMouse;
 import com.doa.engine.scene.DoaObject;
 
-import gameplay.BulletSpecs;
 import gameplay.EnemySpawner;
 import gameplay.Player;
+import gameplay.weapon.BulletSpecs;
+import gameplay.weapon.Weapons;
 import main.Main;
 
 public class Shop extends DoaObject {
@@ -57,12 +58,12 @@ public class Shop extends DoaObject {
 			}),
 			new ShopItem("ARMOR UP", 8, () -> {
 				if(player.getHealth() != player.getHealthMAX()) {
-					player.getBulletSpecs().setCooldown(player.getBulletSpecs().getCooldown() - player.getBulletSpecs().getCooldown() / 3);
+					player.getWeapon().setAttackSpeed(player.getWeapon().getAttackSpeed() * 3);
 				}
 			}),
 			new ShopItem("MOVE SPEED UP", 8, () -> {
 				if(player.getHealth() != player.getHealthMAX()) {
-					player.getBulletSpecs().setCooldown(player.getBulletSpecs().getCooldown() - player.getBulletSpecs().getCooldown() / 3);
+					player.getWeapon().setAttackSpeed(player.getWeapon().getAttackSpeed() * 3);
 				}
 			})
 		};
@@ -71,16 +72,16 @@ public class Shop extends DoaObject {
 		itemListTab2 = new Gun[] {
 				new Gun("PISTOL", 8, () -> {
 					
-				}, new BulletSpecs(6, 6, Color.RED, 2f, 1000, 500, 0, 100, false, false), true),
+				}, Weapons.Pistol, true),
 				new Gun("MACHINEGUN", 8, () -> {
 
-				}, new BulletSpecs(10, 10, Color.BLACK, 3f, 100, 10, 10, 100, false, false), false),
+				}, Weapons.MachineGun, false),
 				new Gun("SHOTGUN", 8, () -> {
 					
-				}, new BulletSpecs(16, 16, Color.BLUE, 2f, 1000, 500, 30, 100, true, false), false),
+				}, Weapons.Shotgun, false),
 				new Gun("SNIPER", 8, () -> {
 					
-				}, new BulletSpecs(14, 40, Color.DARK_GRAY, 5f, 2000, 500, 0, 500, true, false), false)
+				}, Weapons.SniperRifle, false)
 		};
 		
 		// Third Tab Items

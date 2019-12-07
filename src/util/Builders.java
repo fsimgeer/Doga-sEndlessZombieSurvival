@@ -2,11 +2,11 @@ package util;
 
 import com.doa.engine.scene.DoaObjectBuilder;
 
-import gameplay.Bullet;
 import gameplay.Enemy;
 import gameplay.EnemySpawner;
 import gameplay.Player;
 import gameplay.Wall;
+import gameplay.weapon.Bullet;
 import ui.HUD;
 import ui.Level;
 import ui.shop.Shop;

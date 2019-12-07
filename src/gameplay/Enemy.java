@@ -10,6 +10,8 @@ import com.doa.engine.graphics.DoaSprites;
 import com.doa.engine.scene.DoaSceneHandler;
 import com.doa.maths.DoaVectorF;
 
+import gameplay.weapon.Bullet;
+
 public class Enemy extends TypedGameObject {
 
 	private static final long serialVersionUID = -3839835030750716763L;
@@ -58,7 +60,7 @@ public class Enemy extends TypedGameObject {
 
 	public void getHit(final Bullet b) {
 		if (!touchedBullets.contains(b)) {
-			health -= Player.getInstance().getBulletSpecs().getDamage();
+			health -= Player.getInstance().getWeapon().getBulletDamage();
 			if (health < 0) {
 				DoaSceneHandler.getLoadedScene().remove(this);
 				Collision.remove(this);

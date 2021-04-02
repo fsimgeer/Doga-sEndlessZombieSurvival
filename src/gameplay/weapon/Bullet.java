@@ -1,79 +1,101 @@
 package gameplay.weapon;
 
-import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
-import java.util.Arrays;
+import doa.engine.maths.DoaMath;
+import doa.engine.maths.DoaVector;
+import doa.engine.scene.DoaObject;
+import doa.engine.scene.elements.physics.DoaCircleCollider;
+import doa.engine.scene.elements.physics.DoaCollider;
+import doa.engine.scene.elements.physics.DoaEllipseCollider;
+import doa.engine.scene.elements.physics.DoaRigidBody;
+import objects.Enemy;
+import objects.Wall;
+import renderers.BulletRenderer;
+import scripts.BulletLife;
+import scripts.BulletRotationFix;
 
-import com.doa.engine.graphics.DoaGraphicsContext;
-import com.doa.engine.scene.DoaSceneHandler;
-import com.doa.maths.DoaVectorF;
-
-import gameplay.Collision;
-import gameplay.Enemy;
-import gameplay.ObjectType;
-import gameplay.TypedGameObject;
-import util.Builders;
-
-public class Bullet extends TypedGameObject {
+public class Bullet extends DoaObject {
 
 	private static final long serialVersionUID = -4315362367824405514L;
 
-	private transient AWeapon w;
-	DoaVectorF v;
+	public Bullet(DoaVector position, DoaVector direction, IWeapon weapon) {
+		super("Bullet");
+		transform.position.x = position.x;
+		transform.position.y = position.y;
 
-	public Bullet(final Float x, final Float y, final Float mx, final Float my, final AWeapon shooter) {
-		super(x, y);
-		super.type = ObjectType.PROJECTILE;
-		w = shooter;
-		velocity.x = mx - x;
-		velocity.y = my - y;
-		velocity.rotateAngle((Math.random() - .5f) * shooter.getBulletSpread());
-		v = position.clone();
-		velocity = velocity.normalise().mul(w.getBulletTravelSpeed());
-	}
+		DoaVector velocity = new DoaVector(direction);
+		DoaVector.rotateAroundOrigin(velocity, (DoaMath.randomBetween(0, 1) - .5f) * weapon.getBulletSpread(), velocity);
+		DoaVector.normalise(velocity, velocity);
+		transform.rotation = DoaMath.toDegress((float) Math.atan2(velocity.y, velocity.x)) + 90;
+		DoaVector.mul(velocity, weapon.getBulletTravelSpeed(), velocity);
 
-	@Override
-	public synchronized void tick() {
-		position.add(velocity);
-		double distanceSquare = Math.pow(position.x - v.x, 2) + Math.pow(position.y - v.y, 2);
-		if (distanceSquare > Math.pow(w.getBulletRange(), 2)) {
-			deleteBullet();
-		}
-		if (!w.isUsingBouncingRounds() && Collision.checkCollision(this, ObjectType.OBSTACLE)) {
-			deleteBullet();
-		}
-		final TypedGameObject[] possibleHitEnemies = Collision.getCollidingObjects(this, ObjectType.ENEMY);
-		if (!w.isUsingPiercingRounds()) {
-			if (possibleHitEnemies.length > 0) {
-				((Enemy) possibleHitEnemies[0]).getHit(this);
-				deleteBullet();
-			}
+		DoaRigidBody b = new DoaRigidBody();
+		DoaCollider triggerCollider;
+		DoaCollider nonTriggerCollider;
+		if (weapon.getDimensions().x == weapon.getDimensions().y) {
+			triggerCollider = new DoaCircleCollider(weapon.getDimensions().x / 2) {
+
+				@Override
+				public void onTriggerEnter(DoaObject entered, DoaObject enterer) {
+					if (enterer instanceof Enemy enemy) {
+						enemy.lifeScript.life -= weapon.getBulletDamage();
+						if (!weapon.isUsingPiercingRounds()) {
+							delete(Bullet.this);
+						}
+					}
+					if (enterer instanceof Wall wall) {
+						if (!weapon.isUsingBouncingRounds()) {
+							delete(Bullet.this);
+						} else {
+							if (DoaMath.randomIntBetween(0, 100) > weapon.getBounceChance()) {
+								delete(Bullet.this);
+							}
+						}
+					}
+				}
+			}.makeTrigger();
+			nonTriggerCollider = new DoaCircleCollider(weapon.getDimensions().x / 2 - 1).group(-1);
 		} else {
-			Arrays.stream(possibleHitEnemies).forEach(enemy -> ((Enemy) enemy).getHit(this));
+			triggerCollider = new DoaEllipseCollider(weapon.getDimensions().x / 2, weapon.getDimensions().y / 2) {
+				@Override
+				public void onTriggerEnter(DoaObject entered, DoaObject enterer) {
+					if (enterer instanceof Enemy enemy) {
+						enemy.lifeScript.life -= weapon.getBulletDamage();
+						if (!weapon.isUsingPiercingRounds()) {
+							delete(Bullet.this);
+						}
+					}
+					if (enterer instanceof Wall wall) {
+						if (!weapon.isUsingBouncingRounds()) {
+							delete(Bullet.this);
+						} else {
+							if (DoaMath.randomIntBetween(0, 100) > weapon.getBounceChance()) {
+								delete(Bullet.this);
+							}
+						}
+					}
+				}
+			}.makeTrigger();
+			nonTriggerCollider = new DoaEllipseCollider(weapon.getDimensions().x / 2 - 1, weapon.getDimensions().y / 2 - 1).group(-1);
 		}
+		b.colliders.add(triggerCollider);
+		if (weapon.isUsingBouncingRounds()) {
+			b.colliders.add(nonTriggerCollider);
+			b.elasticity = .6f;
+		}
+		b.isBullet = true;
+		b.mass = .3f;
+		b.linearVelocity = velocity;
+		b.fixedRotation = true;
+		addComponent(b);
+
+		addComponent(new BulletRenderer(weapon));
+		addComponent(new BulletLife(weapon));
+		addComponent(new BulletRotationFix());
 	}
 
-	@Override
-	public synchronized void render(final DoaGraphicsContext g) {
-		Rectangle2D.Float dimensions = w.getDimensions();
-
-		g.setColor(w.getBulletColor());
-		g.rotate(Math.atan2(velocity.y, velocity.x) + Math.PI / 2, position.x + dimensions.getCenterX(), position.y + dimensions.getCenterY());
-		g.fillOval(position.x, position.y, dimensions.getWidth(), dimensions.getHeight());
-	}
-
-	@Override
-	public Rectangle getBounds() {
-		Rectangle2D.Float dimensions = w.getDimensions();
-		return new Rectangle((int) position.x, (int) position.y, (int) dimensions.getWidth(), (int) dimensions.getHeight());
-	}
-
-	private void deleteBullet() {
-		DoaSceneHandler.getLoadedScene().remove(this);
-		Collision.remove(this);
-	}
-
-	public static void createBullet(BulletSpecs bs, final float x, final float y, final float mx, final float my) {
-		Collision.add(Builders.BB.args(x, y, mx, my, bs).instantiate());
+	private static void delete(Bullet bullet) {
+		if (bullet.getScene() != null) {
+			bullet.getScene().remove(bullet);
+		}
 	}
 }

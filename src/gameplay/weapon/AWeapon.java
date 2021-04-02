@@ -1,20 +1,19 @@
 package gameplay.weapon;
 
 import java.awt.Color;
-import java.awt.geom.Rectangle2D;
 
-import com.doa.maths.DoaVectorF;
-
-import util.Builders;
+import doa.engine.maths.DoaVector;
+import doa.engine.scene.DoaSceneHandler;
+import doa.engine.task.DoaTaskGuard;
+import doa.engine.task.DoaTasker;
 
 public abstract class AWeapon implements IWeapon {
 
-	protected BulletSpecs bs;
+	protected BulletSpecs bs = new BulletSpecs();
+	protected DoaTaskGuard fireRateGuard = new DoaTaskGuard();
 
 	@Override
-	public Rectangle2D.Float getDimensions() {
-		return new Rectangle2D.Float(0, 0, bs.width, bs.height);
-	}
+	public DoaVector getDimensions() { return new DoaVector(bs.width, bs.height); }
 
 	@Override
 	public void setDimensions(int w, int h) {
@@ -23,102 +22,67 @@ public abstract class AWeapon implements IWeapon {
 	}
 
 	@Override
-	public Color getBulletColor() {
-		return bs.color;
-	}
+	public Color getBulletColor() { return bs.color; }
 
 	@Override
-	public void setBulletColor(int r, int g, int b) {
-		bs.color = new Color(r, g, b);
-	}
+	public void setBulletColor(int r, int g, int b) { bs.color = new Color(r, g, b); }
 
 	@Override
-	public float getBulletTravelSpeed() {
-		return bs.velocity;
-	}
+	public float getBulletTravelSpeed() { return bs.velocity; }
 
 	@Override
-	public void setBulletTravelSpeed(float s) {
-		bs.velocity = s;
-	}
+	public void setBulletTravelSpeed(float s) { bs.velocity = s; }
 
 	@Override
-	public float getAttackSpeed() {
-		return bs.cooldown;
-	}
+	public float getAttackSpeed() { return bs.cooldown; }
 
 	@Override
-	public void setAttackSpeed(float s) {
-		bs.cooldown = s;
-	}
+	public void setAttackSpeed(float s) { bs.cooldown = s; }
 
 	@Override
-	public float getBulletDamage() {
-		return bs.damage;
-	}
+	public float getBulletDamage() { return bs.damage; }
 
 	@Override
-	public void setBulletDamage(float d) {
-		bs.damage = d;
-	}
+	public void setBulletDamage(float d) { bs.damage = d; }
 
 	@Override
-	public float getBulletSpread() {
-		return bs.spread;
-	}
+	public float getBulletSpread() { return bs.spread; }
 
 	@Override
-	public void setBulletSpread(float s) {
-		bs.spread = s;
-	}
+	public void setBulletSpread(float s) { bs.spread = s; }
 
 	@Override
-	public float getBulletRange() {
-		return bs.range;
-	}
+	public int getBulletLife() { return bs.life; }
 
 	@Override
-	public void setBulletRange(float r) {
-		bs.range = r;
-	}
+	public void setBulletLife(int r) { bs.life = r; }
 
 	@Override
-	public boolean isUsingPiercingRounds() {
-		return bs.piercing;
-	}
+	public boolean isUsingPiercingRounds() { return bs.piercing; }
 
 	@Override
-	public void usePiercingRounds() {
-		bs.piercing = true;
-	}
+	public void usePiercingRounds() { bs.piercing = true; }
 
 	@Override
-	public void stopUsingPiercingRounds() {
-		bs.piercing = false;
-	}
+	public void stopUsingPiercingRounds() { bs.piercing = false; }
 
 	@Override
-	public boolean isUsingBouncingRounds() {
-		return bs.bouncing;
-	}
+	public boolean isUsingBouncingRounds() { return bs.bouncing; }
 
 	@Override
-	public void useBouncingRounds() {
-		bs.bouncing = true;
-	}
+	public void useBouncingRounds() { bs.bouncing = true; }
 
 	@Override
-	public void stopUsingBouncingRounds() {
-		bs.bouncing = false;
-	}
+	public void stopUsingBouncingRounds() { bs.bouncing = false; }
 
 	@Override
-	public void fire(float sx, float sy, DoaVectorF direction) {
-		Builders.BB.args(sx, sy, direction.x, direction.y, this).instantiate();
-	}
+	public int getBounceChance() { return bs.bounceChance; }
 
 	@Override
-	public void fire(double sx, double sy, DoaVectorF direction) {
-		fire((float) sx, (float) sy, direction);
+	public void fire(DoaVector position, DoaVector direction) {
+		if (fireRateGuard.get()) {
+			DoaTasker.guard(fireRateGuard, (long) getAttackSpeed());
+			DoaSceneHandler.getLoadedScene().add(new Bullet(position, direction, this));
+		}
 	}
 }

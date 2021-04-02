@@ -7,11 +7,15 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/DoaEngine-2.7.jar" sourcepath="lib/DoaEngine-2.7-sources.jar">
+	<classpathentry kind="lib" path="lib/DoaEngine-3.0.jar" sourcepath="lib/DoaEngine-3.0-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/Doga&apos;sEndlessZombieSurvival/lib/DoaEngine-2.7-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/Doga&apos;sEndlessZombieSurvivall/lib/DoaEngine-3.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/JDOM/jdom-2.0.6.jar"/>
+	<classpathentry kind="lib" path="lib/JDOM/jdom-2.0.6.jar" sourcepath="lib/JDOM/jdom-2.0.6-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/Doga&apos;sEndlessZombieSurvivall/lib/JDOM/jdom-2.0.6-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,18 +1,20 @@
 package gameplay.weapon;
 
+import java.awt.Color;
+
 public class MachineGun extends AWeapon {
-	
+
 	public MachineGun() {
-		bs = new BulletSpecsBuilder()
-				.setDimensions(5, 10)
-				.setColor(0, 0, 0)
-				.setBulletTravelSpeed(3f)
-				.setAttackSpeed(14)
-				.setBulletDamage(10)
-				.setBulletSpread(20)
-				.setBulletRange(300)
-				.setPiercing(false)
-				.setBouncing(false)
-				.instantiate();
+		bs.width = 3;
+		bs.height = 6;
+		bs.color = new Color(0, 0, 0);
+		bs.velocity = 1000f;
+		bs.cooldown = 66.6666666667f;
+		bs.damage = 10;
+		bs.spread = 15;
+		bs.life = 3000;
+		bs.piercing = false;
+		bs.bouncing = true;
+		bs.bounceChance = 15;
 	}
 }

@@ -1,17 +1,19 @@
 package ui.shop;
 
+import static doa.engine.core.DoaGraphicsFunctions.drawString;
+import static doa.engine.core.DoaGraphicsFunctions.fill;
+import static doa.engine.core.DoaGraphicsFunctions.setColor;
+
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
-import com.doa.engine.graphics.DoaGraphicsContext;
-import com.doa.engine.input.DoaMouse;
-import com.doa.engine.task.DoaTaskGuard;
-import com.doa.engine.task.DoaTasker;
-
-import gameplay.Player;
+import doa.engine.input.DoaMouse;
+import doa.engine.task.DoaTaskGuard;
+import doa.engine.task.DoaTasker;
 import gameplay.weapon.IWeapon;
+import objects.Player;
 
 public class Gun extends ShopItem {
 
@@ -69,9 +71,11 @@ public class Gun extends ShopItem {
 				}
 				equipped = true;
 				Player.getInstance().setWeapon(w);
-			} else if (getBounds().contains(mousePoint) && getItemUpgrade() < getNumOfUpgrades() && Player.getInstance().getCoins() >= getCosts()[getItemUpgrade()]) {
-				getItemUpgradeBoxesFill().add(new Rectangle(getItemUpgradeBoxes()[getItemUpgrade()].x + 2, getItemUpgradeBoxes()[getItemUpgrade()].y + 2,
-				        getItemUpgradeBoxes()[getItemUpgrade()].width - 4, getItemUpgradeBoxes()[getItemUpgrade()].height - 4));
+			} else if (getBounds().contains(mousePoint)
+			        && getItemUpgrade() < getNumOfUpgrades()
+			        && Player.getInstance().getCoins() >= getCosts()[getItemUpgrade()]) {
+				getItemUpgradeBoxesFill().add(
+				        new Rectangle(getItemUpgradeBoxes()[getItemUpgrade()].x + 2, getItemUpgradeBoxes()[getItemUpgrade()].y + 2, getItemUpgradeBoxes()[getItemUpgrade()].width - 4, getItemUpgradeBoxes()[getItemUpgrade()].height - 4));
 				Player.getInstance().setCoins(Player.getInstance().getCoins() - getCosts()[getItemUpgrade()]);
 				setItemUpgrade(getItemUpgrade() + 1);
 				getAction().execute();
@@ -86,69 +90,68 @@ public class Gun extends ShopItem {
 	}
 
 	@Override
-	public void render(final DoaGraphicsContext g) {
-		drawPicture(g);
+	public void render() {
+		drawPicture();
 
 		int a = (int) (getInnerBounds().x + 50 + (getInnerBounds().getMaxY() - getInnerBounds().getMinY()) * 3 / 4) + 20;
 		int b = (int) (getInnerBounds().y + (getInnerBounds().getCenterY() - getInnerBounds().getMinY()) / 4) + 22;
 
-		g.setColor(new Color(0, 0, 0, 100));
-		g.drawString(getName().toUpperCase(), a, b);
+		setColor(new Color(0, 0, 0, 100));
+		drawString(getName().toUpperCase(), a, b);
 		if (getItemUpgrade() < getNumOfUpgrades()) {
-			g.drawString("Cost: " + getCosts()[getItemUpgrade()], a, b + 50);
+			drawString("Cost: " + getCosts()[getItemUpgrade()], a, b + 50);
 		} else {
-			g.drawString("Cost: MAX", a, b + 50);
+			drawString("Cost: MAX", a, b + 50);
 		}
 
-		g.setColor(new Color(0, 0, 0, 100));
-		g.drawString("Velocity: " + w.getBulletTravelSpeed(), a, b + 100);
-		g.setColor(new Color(0, 255, 0, alpha));
-		g.drawString((getItemUpgrade() < getNumOfUpgrades()) ? "+" + costs[2][getItemUpgrade()] : "", a + ("Velocity: ".toUpperCase() + w.getBulletTravelSpeed()).length() * 18,
+		setColor(new Color(0, 0, 0, 100));
+		drawString("Velocity: " + w.getBulletTravelSpeed(), a, b + 100);
+		setColor(new Color(0, 255, 0, alpha));
+		drawString((getItemUpgrade() < getNumOfUpgrades()) ? "+" + costs[2][getItemUpgrade()] : "",
+		        a + ("Velocity: ".toUpperCase() + w.getBulletTravelSpeed()).length() * 18,
 		        b + 100);
 
-		g.setColor(new Color(0, 0, 0, 100));
-		g.drawString("Attack Speed: " + w.getAttackSpeed(), a, b + 150);
-		g.setColor(new Color(0, 255, 0, alpha));
-		g.drawString((getItemUpgrade() < getNumOfUpgrades()) ? "-" + costs[3][getItemUpgrade()] : "", a + ("Cooldown: ".toUpperCase() + w.getAttackSpeed()).length() * 18, b + 150);
+		setColor(new Color(0, 0, 0, 100));
+		drawString("Attack Speed: " + w.getAttackSpeed(), a, b + 150);
+		setColor(new Color(0, 255, 0, alpha));
+		drawString((getItemUpgrade() < getNumOfUpgrades()) ? "-" + costs[3][getItemUpgrade()] : "",
+		        a + ("Cooldown: ".toUpperCase() + w.getAttackSpeed()).length() * 18,
+		        b + 150);
 
-		g.setColor(new Color(0, 0, 0, 100));
-		g.drawString("Damage: " + w.getBulletDamage(), a, b + 200);
-		g.setColor(new Color(0, 255, 0, alpha));
-		g.drawString((getItemUpgrade() < getNumOfUpgrades()) ? "+" + costs[4][getItemUpgrade()] : "", a + ("Damage: ".toUpperCase() + w.getBulletDamage()).length() * 18, b + 200);
+		setColor(new Color(0, 0, 0, 100));
+		drawString("Damage: " + w.getBulletDamage(), a, b + 200);
+		setColor(new Color(0, 255, 0, alpha));
+		drawString((getItemUpgrade() < getNumOfUpgrades()) ? "+" + costs[4][getItemUpgrade()] : "",
+		        a + ("Damage: ".toUpperCase() + w.getBulletDamage()).length() * 18,
+		        b + 200);
 
-		g.setColor(new Color(0, 0, 0, 100));
+		setColor(new Color(0, 0, 0, 100));
 		for (int i = 0; i < getNumOfUpgrades(); i++) {
-			g.fill(getItemUpgradeBoxes()[i]);
+			fill(getItemUpgradeBoxes()[i]);
 		}
 
-		g.setColor(new Color(255, 255, 255, 100));
-		getItemUpgradeBoxesFill().stream().forEach(el -> g.fill(el));
+		setColor(new Color(255, 255, 255, 100));
+		getItemUpgradeBoxesFill().stream().forEach(el -> fill(el));
 
-		g.setColor(Color.YELLOW.darker());
-		g.fill(equipButton);
-		g.setColor(Color.BLACK);
+		setColor(Color.YELLOW.darker());
+		fill(equipButton);
+		setColor(Color.BLACK);
 		if (equipped) {
-			g.setColor(Color.YELLOW.darker().darker());
-			g.fill(equipButton);
-			g.setColor(Color.BLACK);
-			g.drawString("EQUIPPED", (int) getInnerBounds().getMaxX() - 165, (int) getInnerBounds().getMaxY() - 30);
+			setColor(Color.YELLOW.darker().darker());
+			fill(equipButton);
+			setColor(Color.BLACK);
+			drawString("EQUIPPED", (int) getInnerBounds().getMaxX() - 165, (int) getInnerBounds().getMaxY() - 30);
 		} else {
-			g.setColor(Color.YELLOW.darker());
-			g.fill(equipButton);
-			g.setColor(Color.BLACK);
-			g.drawString("EQUIP", (int) getInnerBounds().getMaxX() - 140, (int) getInnerBounds().getMaxY() - 30);
+			setColor(Color.YELLOW.darker());
+			fill(equipButton);
+			setColor(Color.BLACK);
+			drawString("EQUIP", (int) getInnerBounds().getMaxX() - 140, (int) getInnerBounds().getMaxY() - 30);
 		}
 	}
 
-	public void setEquipButton(Rectangle r) {
-		equipButton = r;
-	}
+	public void setEquipButton(Rectangle r) { equipButton = r; }
 
-	public boolean getEquipped() {
-		return equipped;
-	}
+	public boolean getEquipped() { return equipped; }
 
-	public void setEquipped(boolean e) {
-		equipped = e;
-	}
+	public void setEquipped(boolean e) { equipped = e; }
 }

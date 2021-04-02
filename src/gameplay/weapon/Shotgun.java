@@ -1,34 +1,34 @@
 package gameplay.weapon;
 
-import com.doa.maths.DoaVectorF;
+import java.awt.Color;
 
-import util.Builders;
+import doa.engine.maths.DoaVector;
+import doa.engine.scene.DoaSceneHandler;
+import doa.engine.task.DoaTasker;
 
 public class Shotgun extends AWeapon {
-	
+
 	public Shotgun() {
-		bs = new BulletSpecsBuilder()
-				.setDimensions(8, 8)
-				.setColor(255, 0, 0)
-				.setBulletTravelSpeed(1.5f)
-				.setAttackSpeed(1f)
-				.setBulletDamage(500)
-				.setBulletSpread(40)
-				.setBulletRange(200)
-				.setPiercing(true)
-				.setBouncing(false)
-				.instantiate();
-	}
-	
-	@Override
-	public void fire(float sx, float sy, DoaVectorF direction) {
-		for(int i = 0; i < 8; ++i) {
-			Builders.BB.args(sx, sy, direction.x, direction.y, this).instantiate();
-		}
+		bs.width = 8;
+		bs.height = 8;
+		bs.color = new Color(255, 0, 0);
+		bs.velocity = 1.5f;
+		bs.cooldown = 1f;
+		bs.damage = 500;
+		bs.spread = 40;
+		bs.life = 200;
+		bs.piercing = true;
+		bs.bouncing = false;
+		bs.bounceChance = 0;
 	}
 
 	@Override
-	public void fire(double sx, double sy, DoaVectorF direction) {
-		fire((float) sx, (float) sy, direction);
+	public void fire(DoaVector position, DoaVector direction) {
+		if (fireRateGuard.get()) {
+			DoaTasker.guard(fireRateGuard, (long) getAttackSpeed());
+			for (int i = 0; i < 8; ++i) {
+				DoaSceneHandler.getLoadedScene().add(new Bullet(position, direction, this));
+			}
+		}
 	}
 }

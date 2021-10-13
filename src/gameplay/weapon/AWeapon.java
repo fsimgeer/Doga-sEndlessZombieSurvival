@@ -2,6 +2,7 @@ package gameplay.weapon;
 
 import java.awt.Color;
 
+import doa.engine.maths.DoaMath;
 import doa.engine.maths.DoaVector;
 import doa.engine.scene.DoaSceneHandler;
 import doa.engine.task.DoaTaskGuard;
@@ -82,6 +83,8 @@ public abstract class AWeapon implements IWeapon {
 	public void fire(DoaVector position, DoaVector direction) {
 		if (fireRateGuard.get()) {
 			DoaTasker.guard(fireRateGuard, (long) getAttackSpeed());
+			DoaVector.rotateAroundOrigin(direction, (DoaMath.randomBetween(0, 1) - .5f) * bs.spread, direction);
+			DoaVector.normalise(direction, direction);
 			DoaSceneHandler.getLoadedScene().add(new Bullet(position, direction, this));
 		}
 	}

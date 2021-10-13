@@ -23,8 +23,6 @@ public class Bullet extends DoaObject {
 		transform.position.y = position.y;
 
 		DoaVector velocity = new DoaVector(direction);
-		DoaVector.rotateAroundOrigin(velocity, (DoaMath.randomBetween(0, 1) - .5f) * weapon.getBulletSpread(), velocity);
-		DoaVector.normalise(velocity, velocity);
 		transform.rotation = DoaMath.toDegress((float) Math.atan2(velocity.y, velocity.x)) + 90;
 		DoaVector.mul(velocity, weapon.getBulletTravelSpeed(), velocity);
 

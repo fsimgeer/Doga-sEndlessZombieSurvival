@@ -9,6 +9,7 @@ import doa.engine.graphics.DoaLights;
 import doa.engine.graphics.DoaSprites;
 import doa.engine.log.DoaLogger;
 import doa.engine.log.LogLevel;
+import doa.engine.maths.DoaVector;
 import doa.engine.scene.DoaSceneHandler;
 import util.Assets;
 import util.LevelLoader;
@@ -25,6 +26,6 @@ public class Main extends DoaGame {
 		DoaSceneHandler.loadScene(DoaSceneHandler.createScene("gameScene"));
 		LevelLoader.loadLevel(DoaSprites.ORIGINAL_SPRITES.get("mapData"), DoaSprites.getSprite("map"));
 		wSettings.TITLE = "DOA's Endless Zombie Survival!";
-		// wSettings.DM = wSettings.SCREEN.getDisplayModes()[40];
+		wSettings.RESOLUTION_OD = new DoaVector(1920, 1080);
 	}
 }

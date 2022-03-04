@@ -20,11 +20,8 @@ public class ShopItem extends DoaObject{
 		this.tab = tab;
 		this.itemData = tab.tabData.items.get(index);
 
-		int rowCount = (tab.tabData.items.size() <= columnItemCount)	// items in the tab fits in one row
-						? 1
-						: (tab.tabData.items.size() % columnItemCount == 0)
-						? (tab.tabData.items.size() / columnItemCount)
-						: (tab.tabData.items.size() / columnItemCount) + 1;
+		int rowCount = (int) Math.ceil((float)tab.tabData.items.size() / columnItemCount);
+		
 		int itemWidth = (Shop.SHOP_WIDTH - (columnItemCount + 1) * Shop.DIST_BETWEEN_ITEMS) / columnItemCount;
 		int itemHeight = (Shop.SHOP_HEIGHT - (rowCount + 1) * Shop.DIST_BETWEEN_ITEMS - 100) / rowCount;
 

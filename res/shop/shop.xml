@@ -17,7 +17,7 @@
 
 <shop>
 	<tab>
-		<tab-name>Health - Armor</tab-name>
+		<tab-name>Character</tab-name>
 		<shop-item>
 			<item-name>Max Health Up</item-name>
 			<picture>UnknownItem</picture>
@@ -149,7 +149,7 @@
 		</shop-item>
 	</tab>
 	<tab>
-		<tab-name>Guns</tab-name>
+		<tab-name>Inventory</tab-name>
 		<shop-item>
 			<item-name>Pistol</item-name>
 			<picture>UnknownItem</picture>
@@ -292,7 +292,7 @@
 		</shop-item>
 	</tab>
 	<tab>
-		<tab-name>Grenade - Beacon</tab-name>
+		<tab-name>Weapons</tab-name>
 		<shop-item>
 			<item-name></item-name>
 			<picture>UnknownItem</picture>
@@ -311,7 +311,7 @@
 		</shop-item>
 	</tab>
 	<tab>
-		<tab-name>Specials</tab-name>
+		<tab-name>Items</tab-name>
 		<shop-item>
 			<item-name></item-name>
 			<picture>UnknownItem</picture>

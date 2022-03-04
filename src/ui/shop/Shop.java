@@ -17,7 +17,7 @@ public class Shop extends DoaObject{
 	public static final int SHOP_HEIGHT = 1080 - 2 * Y;
 
 	public static final int DIST_BETWEEN_ITEMS = 30;
-	public static final int COLUMN_ITEM_COUNT = 4;
+	public static final int COLUMN_ITEM_COUNT = 2;
 
 	public final Rectangle closeButton = new Rectangle((int) X + SHOP_WIDTH - 120, (int) Y + SHOP_HEIGHT - 60, 100, 40);
 	private ShopTab selectedTab;

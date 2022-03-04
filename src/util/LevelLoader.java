@@ -12,6 +12,8 @@ import objects.EnemySpawner;
 import objects.Player;
 import objects.Wall;
 import renderers.HUDRenderer;
+import ui.shop.Shop;
+import ui.shop.ShopLoader;
 
 public class LevelLoader {
 
@@ -64,6 +66,7 @@ public class LevelLoader {
 		HUDRenderer hudr = new HUDRenderer();
 		hud.addComponent(hudr);
 		loaded.add(hud);
-
+		
+		ShopLoader.createShop(loaded);
 	}
 }

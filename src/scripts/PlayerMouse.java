@@ -40,7 +40,7 @@ public class PlayerMouse extends DoaMouseAdapter {
 	}
 
 	@Override
-	public void onMouse1Hold() { ((Player) getOwner()).data.weapon.fire(playerPos, toMouse); }
+	public void onMouse1Hold() { ((Player) getOwner()).data.getWeapon().fire(playerPos, toMouse); }
 
 	@Override
 	public void onMouse1Release() {

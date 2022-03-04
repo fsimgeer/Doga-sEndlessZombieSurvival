@@ -45,34 +45,34 @@ public class HUDRenderer extends DoaRenderer {
 		setColor(TRANSLUCENT_GRAY);
 		fillRect(1920 - 60 - 3, 20 - 3, 50 + 6, pd.getHealthMAX() + 6);
 		setColor(TRANSLUCENT_GREEN);
-		fillRect(1920 - 60, 20, 50, pd.health);
+		fillRect(1920 - 60, 20, 50, pd.getHealth());
 		pushStroke();
 		setStroke(new BasicStroke(4));
 		setColor(TRANSLUCENT_DARK_GREEN);
-		drawRect(1920 - 60, 20, 50, pd.health);
+		drawRect(1920 - 60, 20, 50, pd.getHealth());
 		popStroke();
 		popTransform();
 
 		setFont(DoaFonts.getFont("Soup").deriveFont(36f));
 
 		setColor(GRAY);
-		drawString(COINS + pd.coins, 69, 1080 - 81);
-		drawString(COINS + pd.coins, 69, 1080 - 79);
-		drawString(COINS + pd.coins, 71, 1080 - 81);
-		drawString(COINS + pd.coins, 71, 1080 - 79);
+		drawString(COINS + pd.getCoins(), 69, 1080 - 81);
+		drawString(COINS + pd.getCoins(), 69, 1080 - 79);
+		drawString(COINS + pd.getCoins(), 71, 1080 - 81);
+		drawString(COINS + pd.getCoins(), 71, 1080 - 79);
 		drawString(LEVEL + EnemySpawner.getDifficulty(), 69, 1080 - 51);
 		drawString(LEVEL + EnemySpawner.getDifficulty(), 69, 1080 - 49);
 		drawString(LEVEL + EnemySpawner.getDifficulty(), 71, 1080 - 51);
 		drawString(LEVEL + EnemySpawner.getDifficulty(), 71, 1080 - 49);
-		drawString(SCORE + pd.score, 69, 1080 - 21);
-		drawString(SCORE + pd.score, 69, 1080 - 19);
-		drawString(SCORE + pd.score, 71, 1080 - 21);
-		drawString(SCORE + pd.score, 71, 1080 - 19);
+		drawString(SCORE + pd.getScore(), 69, 1080 - 21);
+		drawString(SCORE + pd.getScore(), 69, 1080 - 19);
+		drawString(SCORE + pd.getScore(), 71, 1080 - 21);
+		drawString(SCORE + pd.getScore(), 71, 1080 - 19);
 
 		setColor(ORANGE);
-		drawString(COINS + pd.coins, 70, 1080 - 80);
+		drawString(COINS + pd.getCoins(), 70, 1080 - 80);
 		drawString(LEVEL + EnemySpawner.getDifficulty(), 70, 1080 - 50);
-		drawString(SCORE + pd.score, 70, 1080 - 20);
+		drawString(SCORE + pd.getScore(), 70, 1080 - 20);
 	}
 
 }

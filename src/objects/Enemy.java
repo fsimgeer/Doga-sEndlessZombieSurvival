@@ -53,8 +53,8 @@ public class Enemy extends DoaObject {
 		super.onRemoveFromScene(scene);
 		EnemySpawner.enemyDied();
 
-		Player.getInstance().data.coins += Math.max(1, Math.ceil(EnemySpawner.getDifficulty() / Math.PI));
-		Player.getInstance().data.score += EnemySpawner.getDifficulty() * Math.PI;
+		Player.getInstance().data.setCoins((int)(Player.getInstance().data.getCoins() + Math.max(1, Math.ceil(EnemySpawner.getDifficulty() / Math.PI))));
+		Player.getInstance().data.setScore((int)(Player.getInstance().data.getScore() + EnemySpawner.getDifficulty() * Math.PI));
 	}
 
 }

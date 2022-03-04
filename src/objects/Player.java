@@ -40,14 +40,14 @@ public class Player extends DoaObject {
 			@Override
 			public void onTriggerEnter(DoaObject entered, DoaObject enterer) {
 				if (enterer instanceof Enemy enemy) {
-					((Player) entered).data.healthDecay += 1;
+					((Player) entered).data.setHealthDecay(((Player) entered).data.getHealthDecay() + 1);
 				}
 			}
 
 			@Override
 			public void onTriggerExit(DoaObject exited, DoaObject exiter) {
 				if (exiter instanceof Enemy enemy) {
-					((Player) exited).data.healthDecay -= 1;
+					((Player) exited).data.setHealthDecay(((Player) exited).data.getHealthDecay() - 1);
 				}
 			}
 		}.makeTrigger());

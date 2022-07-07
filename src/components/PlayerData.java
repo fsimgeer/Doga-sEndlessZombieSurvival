@@ -20,16 +20,10 @@ public class PlayerData extends DoaScript {
 
 	private DoaWASDControl control;
 
-	public IWeapon getWeapon() {
-		return weapon;
-	}
-	public void setWeapon(IWeapon newWeapon) {
-		weapon = newWeapon;
-	}
+	public IWeapon getWeapon() { return weapon;	}
+	public void setWeapon(IWeapon newWeapon) { weapon = newWeapon; }
 
-	public int getHealth() {
-		return (int)health;
-	}
+	public int getHealth() { return (int)health; }
 	public void setHealth(float newHealth) {
 		if(newHealth < 0) return;
 		if(newHealth >= healthMAX)
@@ -44,34 +38,20 @@ public class PlayerData extends DoaScript {
 		health = healthMAX * percentage;
 	}
 
-	public float getSpeed() {
-		return speed;
-	}
-	public void setSpeed(float newSpeed) {
-		speed = newSpeed;
-	}
+	public float getSpeed() { return speed; }
+	public void setSpeed(float newSpeed) { speed = newSpeed; }
 	
-	public int getCoins() {
-		return coins;
-	}
+	public int getCoins() { return coins; }
 	public void setCoins(int newCoins) {
 		if(newCoins < 0) return;
 		coins = newCoins;
 	}
 
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int newScore) {
-		score = newScore;
-	}
+	public int getScore() { return score; }
+	public void setScore(int newScore) { score = newScore; }
 	
-	public float getHealthDecay() {
-		return healthDecay;
-	}
-	public void setHealthDecay(float newHealthDecay) {
-		healthDecay = newHealthDecay;
-	}
+	public float getHealthDecay() { return healthDecay; }
+	public void setHealthDecay(float newHealthDecay) { healthDecay = newHealthDecay; }
 
 	@Override
 	protected void onAdd(DoaObject o) {

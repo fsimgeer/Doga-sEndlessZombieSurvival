@@ -15,7 +15,7 @@ public class ShopTabBehaviour extends DoaScript {
 	
 	@Override
 	public void tick() {
-		if(DoaMouse.MB1 && tab.bounds.contains(DoaMouse.X, DoaMouse.Y))
-			tab.shop.setSelectedTab(tab);
+		if(DoaMouse.MB1 && tab.titleBounds.contains(DoaMouse.X, DoaMouse.Y))
+			tab.select();
 	}
 }

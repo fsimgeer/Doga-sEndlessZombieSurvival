@@ -21,9 +21,8 @@ public class ShopItemBehaviour extends DoaScript {
 	@Override
 	public void tick() {
 		if (DoaMouse.MB1 && item.tab.isSelected() && item.bounds.contains(DoaMouse.X, DoaMouse.Y)) {
-			if(!item.isSelected())
-				item.select();
-			else if(itemData.numOfUpgrades < itemData.costs.size() && player.data.getCoins() >= itemData.costs.get(itemData.numOfUpgrades)) {	// if upgrade not already maxed out & player has enough money
+			//item.select();
+			if(itemData.numOfUpgrades < itemData.costs.size() && player.data.getCoins() >= itemData.costs.get(itemData.numOfUpgrades)) {	// if upgrade not already maxed out & player has enough money
 				for(int i = 0; i < itemData.upgrades.size(); i++) {
 					if(itemData.upgrades.get(i).action.execute(itemData.upgrades.get(i).effects.get(itemData.numOfUpgrades))) {
 						player.data.setCoins(player.data.getCoins() - itemData.costs.get(itemData.numOfUpgrades));	// decrease the coins only if the action has been completed successfully

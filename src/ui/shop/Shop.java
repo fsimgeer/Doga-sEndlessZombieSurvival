@@ -1,6 +1,7 @@
 package ui.shop;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import components.ShopData;
 import doa.engine.scene.DoaObject;
@@ -20,28 +21,60 @@ public class Shop extends DoaObject{
 	public static final int COLUMN_ITEM_COUNT = 2;
 
 	public final Rectangle closeButton = new Rectangle((int) X + SHOP_WIDTH - 120, (int) Y + SHOP_HEIGHT - 60, 100, 40);
-	private ShopTab selectedTab;
+	private int selectedTab;
+	
+	private ArrayList<ShopTab> tabs = new ArrayList<ShopTab>();
+	
+	final int tabTitleWidth;
+	final int shopTitleHeight = 50;
+	final Rectangle bounds = new Rectangle(Shop.X, Shop.Y + shopTitleHeight, Shop.SHOP_WIDTH, Shop.SHOP_HEIGHT - shopTitleHeight);
 	
 	public Shop(ShopData shopData) {
 		this.shopData = shopData;
 		setzOrder(1000);
 		addComponent(new ShopRenderer(this));
+		
+		tabTitleWidth = Shop.SHOP_WIDTH / shopData.tabs.size();
 	}
 
 	public void initializeTabs() {
-		for (int i = 0; i < shopData.tabs.size(); i++) {
-			ShopTab newTab = new ShopTab(this, i);
-			newTab.setzOrder(getzOrder() + 1);
-			if(i == 0) setSelectedTab(newTab);
-			getScene().add(newTab);
-		}
+		int tab1ColCount = 2;
+		int tab2ColCount = 3;
+		int tab3ColCount = 2;
+		int tab4ColCount = 2;
+		
+		CreateShopTab(tab1ColCount);
+		CreateShopTab(tab2ColCount);
+		CreateShopTab(tab3ColCount);
+		CreateShopTab(tab4ColCount);
+		
+		setSelectedTab(0);
 	}
 	
-	public void setSelectedTab(ShopTab tab) {
-		selectedTab = tab;
+	private void CreateShopTab(int colCount) {
+		int index = tabs.size();
+		
+		Rectangle titleBounds = new Rectangle(Shop.X + index * tabTitleWidth, Shop.Y, tabTitleWidth, shopTitleHeight);
+		ShopTab tab = new ShopTab(this, colCount, shopData.tabs.get(index), titleBounds, bounds);
+		
+		tab.setzOrder(getzOrder() + 1);
+		getScene().add(tab);
+		
+		tabs.add(tab);
+	}
+	
+	public ShopTab getSelectedTab() {
+		return tabs.get(selectedTab);
 	}
 
-	public ShopTab getSelectedTab() {
-		return selectedTab;
+	public void setSelectedTab(int index) {
+		selectedTab = index;
+	}
+	
+	public void setSelectedTab(ShopTab shopTab) {
+		int idx = tabs.indexOf(shopTab);
+		if (idx == -1)
+			throw new IllegalArgumentException("There is no such shop tab in this shop!!!");
+		selectedTab = idx;
 	}
 }

@@ -41,7 +41,7 @@ public class ShopItemRenderer extends DoaSpriteRenderer {
 			setFont(DoaFonts.getFont("Soup").deriveFont(36f));
 			
 			// drawing the outer bounds of the item with the color changing according the item being selected or not
-			if (item.isSelected()) {
+			/*if (item.isSelected()) {
 				setColor(new Color(200, 100, 200, 100));
 			} else {
 				setColor(new Color(100, 200, 200, 100));
@@ -54,7 +54,7 @@ public class ShopItemRenderer extends DoaSpriteRenderer {
 			} else {
 				setColor(new Color(200, 200, 200, 100));
 			}
-			fill(innerBounds);
+			fill(innerBounds);*/
 
 			// item image
 			drawImage(DoaSprites.getSprite(itemData.picture),
@@ -92,10 +92,10 @@ public class ShopItemRenderer extends DoaSpriteRenderer {
 			for(int i = 0; i < itemData.upgrades.size(); i++) {
 				setColor(Color.BLACK);
 				drawString(itemData.upgrades.get(i).name, (int)innerBounds.getMinX() + 10, (int)innerBounds.getMinY() + i * 50 + 160);
-				if(item.isSelected()) {
+				/*if(item.isSelected()) {
 					setColor(new Color(0, 255, 0, (int)alpha));
 					drawString("+" + itemData.upgrades.get(i).effects.get(itemData.numOfUpgrades), (int)innerBounds.getMinX() + itemData.upgrades.get(i).name.length() * 23, (int)innerBounds.getMinY() + i * 50 + 160);
-				}
+				}*/
 			}
 
 			// upgrade boxes (outer) which show the number of upgrades

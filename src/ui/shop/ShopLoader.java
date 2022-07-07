@@ -8,12 +8,12 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
-import components.ShopData;
-import components.ShopItemData;
-import components.ShopTabData;
-import components.ShopUpgradeData;
 import doa.engine.log.DoaLogger;
 import doa.engine.scene.DoaScene;
+import ui.shop.data.ShopData;
+import ui.shop.data.ShopItemData;
+import ui.shop.data.ShopTabData;
+import ui.shop.data.ShopUpgradeData;
 import ui.shop.upgrade.ShopUpgradeBank;
 
 public class ShopLoader {
@@ -23,7 +23,6 @@ public class ShopLoader {
 	public static void createShop(DoaScene scene) {
 		try {
 			Shop s = new Shop(createShop(new File("res/shop/shop.xml")));
-			s.makeStatic();
 			scene.add(s);
 			s.initializeTabs();
 		} catch (JDOMException | IOException ex) {

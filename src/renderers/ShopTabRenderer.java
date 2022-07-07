@@ -10,6 +10,7 @@ import java.awt.Rectangle;
 
 import doa.engine.graphics.DoaFonts;
 import doa.engine.scene.elements.renderers.DoaRenderer;
+import ui.shop.Shop;
 import ui.shop.ShopTab;
 
 public class ShopTabRenderer extends DoaRenderer {
@@ -17,27 +18,31 @@ public class ShopTabRenderer extends DoaRenderer {
 
 	ShopTab tab;
 	
+	Rectangle titleBounds;
+
 	Rectangle bounds;
 	
 	public ShopTabRenderer(ShopTab tab){
 		this.tab = tab;
-		this.bounds = tab.bounds;
+		this.titleBounds = tab.titleBounds;
 	}
 
 	@Override
 	public void render() {
 		setColor(Color.YELLOW.darker());
-		fill(bounds);
+		fill(titleBounds);
 		
-		if(tab.isSelected()) {
+		if (tab.isSelected()) {
 			setColor(Color.YELLOW.darker().darker());
-			fill(bounds);
-
+			fill(titleBounds);
 		}
 
 		setFont(DoaFonts.getFont("Soup").deriveFont(36f));
 		setColor(Color.BLACK);
-		drawString(tab.tabData.name.toUpperCase(), (float) bounds.getMinX() + 10, (float) bounds.getMaxY() - 10);
+		drawString(tab.tabData.name.toUpperCase(), (float) titleBounds.getMinX() + 10, (float) titleBounds.getMaxY() - 10);
+		
+		//int tabTitleWidth = Shop.SHOP_WIDTH / tab.colCount;
+		//bounds = new Rectangle(Shop.X + index * tabTitleWidth, Shop.Y, tabTitleWidth, 50);
 		
 	}
 }

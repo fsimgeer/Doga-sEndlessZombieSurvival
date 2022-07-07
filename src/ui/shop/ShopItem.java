@@ -16,11 +16,11 @@ public class ShopItem extends DoaObject{
 	
 	private int columnItemCount = Shop.COLUMN_ITEM_COUNT;
 	
-	public ShopItem(ShopTab tab, int index) {
-		this.tab = tab;
-		this.itemData = tab.tabData.items.get(index);
+	public ShopItem(ShopTabColumn shopTabColumn, int index) {
+		this.tab = shopTabColumn.tab;
+		this.itemData = shopTabColumn.tab.tabData.items.get(index);
 
-		int rowCount = (int) Math.ceil((float)tab.tabData.items.size() / columnItemCount);
+		int rowCount = (int) Math.ceil((float)shopTabColumn.tab.tabData.items.size() / columnItemCount);
 		
 		int itemWidth = (Shop.SHOP_WIDTH - (columnItemCount + 1) * Shop.DIST_BETWEEN_ITEMS) / columnItemCount;
 		int itemHeight = (Shop.SHOP_HEIGHT - (rowCount + 1) * Shop.DIST_BETWEEN_ITEMS - 100) / rowCount;
@@ -32,13 +32,5 @@ public class ShopItem extends DoaObject{
 		addComponent(new ShopItemRenderer(this));
 		addComponent(new ShopItemBehaviour(this));
 		makeStatic();
-	}
-	
-	public void select() {
-		tab.setSelectedItem(this);
-	}
-	
-	public boolean isSelected() {
-		return tab.getSelectedItem() == this;
 	}
 }

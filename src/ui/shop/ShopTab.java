@@ -1,6 +1,7 @@
 package ui.shop;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import components.ShopTabData;
 import doa.engine.scene.DoaObject;
@@ -12,25 +13,30 @@ public class ShopTab extends DoaObject{
 
 	public final Shop shop;
 	public final ShopTabData tabData;
+	public final Rectangle titleBounds;
 	public final Rectangle bounds;
 	
 	private ShopItem selectedItem;
 	
-	public ShopTab(Shop shop, int index) {
+	private final ArrayList<ShopTabColumn> cols;
+	
+	public ShopTab(Shop shop, int colCount, ShopTabData tabData, Rectangle titleBounds, Rectangle bounds) {
 		this.shop = shop;
-		this.tabData = shop.shopData.tabs.get(index);
-
-		int tabWidth = Shop.SHOP_WIDTH / shop.shopData.tabs.size();
-		bounds = new Rectangle(Shop.X + index * tabWidth, Shop.Y, tabWidth, 50);
+		cols = new ArrayList<ShopTabColumn>(colCount);
+		this.tabData = tabData;
+		this.titleBounds = titleBounds;
+		this.bounds = bounds;
 		
 		addComponent(new ShopTabRenderer(this));
 		addComponent(new ShopTabBehaviour(this));
 		makeStatic();
 
-		for (int i = 0; i < tabData.items.size(); i++) {
-			ShopItem newItem = new ShopItem(this, i);
-			newItem.setzOrder(shop.getzOrder() + 2);
-			shop.getScene().add(newItem);
+		for (int i = 0; i < colCount; i++) {
+			Rectangle colBounds = new Rectangle(bounds.x + (bounds.width * i / colCount), bounds.y, (bounds.width / colCount), bounds.height);
+			ShopTabColumn col = new ShopTabColumn(this, colBounds);
+			col.setzOrder(shop.getzOrder() + 2);
+			cols.add(col);
+			shop.getScene().add(col);
 		}
 	}
 	
@@ -40,13 +46,5 @@ public class ShopTab extends DoaObject{
 	
 	public boolean isSelected() {
 		return shop.getSelectedTab() == this;
-	}
-
-	public void setSelectedItem(ShopItem item) {
-		selectedItem = item;
-	}
-
-	public ShopItem getSelectedItem() {
-		return selectedItem;
 	}
 }

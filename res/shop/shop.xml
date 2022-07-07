@@ -19,130 +19,17 @@
 	<tab>
 		<tab-name>Character</tab-name>
 		<shop-item>
-			<item-name>Max Health Up</item-name>
+			<item-name></item-name>
 			<picture>UnknownItem</picture>
 			<upgrade-costs>
-				<cost>10</cost>
-				<cost>20</cost>
-				<cost>40</cost>
-				<cost>80</cost>
-				<cost>160</cost>
-				<cost>320</cost>
-				<cost>640</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>MaxHealthUpAction</upgrade-action>
-					<upgrade-name>Max Health</upgrade-name>
-					<upgrade-effects>
-						<effect>20</effect>
-						<effect>40</effect>
-						<effect>60</effect>
-						<effect>80</effect>
-						<effect>100</effect>
-						<effect>150</effect>
-						<effect>200</effect>
-					</upgrade-effects>
-					
-				</upgrade>
-			</upgrades>
-		</shop-item>
-		<shop-item>
-			<item-name>Heal</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>10</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>HealAction</upgrade-action>
-					<upgrade-name>Health</upgrade-name>
-					<upgrade-effects>
-						<effect>50</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
-		<shop-item>
-			<item-name>Armor Up</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>10</cost>
-				<cost>20</cost>
-				<cost>40</cost>
-				<cost>80</cost>
-				<cost>160</cost>
-				<cost>320</cost>
-				<cost>640</cost>
+				<cost>0</cost>
 			</upgrade-costs>
 			<upgrades>
 				<upgrade>
 					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Max Health</upgrade-name>
+					<upgrade-name></upgrade-name>
 					<upgrade-effects>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
-		<shop-item>
-			<item-name>Move Speed Up</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>10</cost>
-				<cost>20</cost>
-				<cost>40</cost>
-				<cost>80</cost>
-				<cost>160</cost>
-				<cost>320</cost>
-				<cost>640</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Move Speed</upgrade-name>
-					<upgrade-effects>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
-		<shop-item>
-			<item-name>Blob</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>10</cost>
-				<cost>20</cost>
-				<cost>40</cost>
-				<cost>80</cost>
-				<cost>160</cost>
-				<cost>320</cost>
-				<cost>640</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Blup</upgrade-name>
-					<upgrade-effects>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
+						<effect>0</effect>
 					</upgrade-effects>
 				</upgrade>
 			</upgrades>
@@ -150,6 +37,25 @@
 	</tab>
 	<tab>
 		<tab-name>Inventory</tab-name>
+		<shop-item>
+			<item-name></item-name>
+			<picture>UnknownItem</picture>
+			<upgrade-costs>
+				<cost>0</cost>
+			</upgrade-costs>
+			<upgrades>
+				<upgrade>
+					<upgrade-action>UnknownAction</upgrade-action>
+					<upgrade-name></upgrade-name>
+					<upgrade-effects>
+						<effect>0</effect>
+					</upgrade-effects>
+				</upgrade>
+			</upgrades>
+		</shop-item>
+	</tab>
+	<tab>
+		<tab-name>Weapons</tab-name>
 		<shop-item>
 			<item-name>Pistol</item-name>
 			<picture>UnknownItem</picture>
@@ -292,38 +198,132 @@
 		</shop-item>
 	</tab>
 	<tab>
-		<tab-name>Weapons</tab-name>
+		<tab-name>Items</tab-name>
 		<shop-item>
-			<item-name></item-name>
+			<item-name>Max Health Up</item-name>
 			<picture>UnknownItem</picture>
 			<upgrade-costs>
-				<cost>0</cost>
+				<cost>10</cost>
+				<cost>20</cost>
+				<cost>40</cost>
+				<cost>80</cost>
+				<cost>160</cost>
+				<cost>320</cost>
+				<cost>640</cost>
 			</upgrade-costs>
 			<upgrades>
 				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name></upgrade-name>
+					<upgrade-action>MaxHealthUpAction</upgrade-action>
+					<upgrade-name>Max Health</upgrade-name>
 					<upgrade-effects>
-						<effect>0</effect>
+						<effect>20</effect>
+						<effect>40</effect>
+						<effect>60</effect>
+						<effect>80</effect>
+						<effect>100</effect>
+						<effect>150</effect>
+						<effect>200</effect>
+					</upgrade-effects>
+					
+				</upgrade>
+			</upgrades>
+		</shop-item>
+		<shop-item>
+			<item-name>Heal</item-name>
+			<picture>UnknownItem</picture>
+			<upgrade-costs>
+				<cost>10</cost>
+			</upgrade-costs>
+			<upgrades>
+				<upgrade>
+					<upgrade-action>HealAction</upgrade-action>
+					<upgrade-name>Health</upgrade-name>
+					<upgrade-effects>
+						<effect>50</effect>
 					</upgrade-effects>
 				</upgrade>
 			</upgrades>
 		</shop-item>
-	</tab>
-	<tab>
-		<tab-name>Items</tab-name>
 		<shop-item>
-			<item-name></item-name>
+			<item-name>Armor Up</item-name>
 			<picture>UnknownItem</picture>
 			<upgrade-costs>
-				<cost>0</cost>
+				<cost>10</cost>
+				<cost>20</cost>
+				<cost>40</cost>
+				<cost>80</cost>
+				<cost>160</cost>
+				<cost>320</cost>
+				<cost>640</cost>
 			</upgrade-costs>
 			<upgrades>
 				<upgrade>
 					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name></upgrade-name>
+					<upgrade-name>Max Health</upgrade-name>
 					<upgrade-effects>
-						<effect>0</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+					</upgrade-effects>
+				</upgrade>
+			</upgrades>
+		</shop-item>
+		<shop-item>
+			<item-name>Move Speed Up</item-name>
+			<picture>UnknownItem</picture>
+			<upgrade-costs>
+				<cost>10</cost>
+				<cost>20</cost>
+				<cost>40</cost>
+				<cost>80</cost>
+				<cost>160</cost>
+				<cost>320</cost>
+				<cost>640</cost>
+			</upgrade-costs>
+			<upgrades>
+				<upgrade>
+					<upgrade-action>UnknownAction</upgrade-action>
+					<upgrade-name>Move Speed</upgrade-name>
+					<upgrade-effects>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+					</upgrade-effects>
+				</upgrade>
+			</upgrades>
+		</shop-item>
+		<shop-item>
+			<item-name>Blob</item-name>
+			<picture>UnknownItem</picture>
+			<upgrade-costs>
+				<cost>10</cost>
+				<cost>20</cost>
+				<cost>40</cost>
+				<cost>80</cost>
+				<cost>160</cost>
+				<cost>320</cost>
+				<cost>640</cost>
+			</upgrade-costs>
+			<upgrades>
+				<upgrade>
+					<upgrade-action>UnknownAction</upgrade-action>
+					<upgrade-name>Blup</upgrade-name>
+					<upgrade-effects>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
+						<effect>50</effect>
 					</upgrade-effects>
 				</upgrade>
 			</upgrades>

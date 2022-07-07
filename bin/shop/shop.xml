@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE shop [
 <!ELEMENT shop (tab+)>
-<!ELEMENT tab (tab-name, shop-item+)>
-<!ELEMENT shop-item (item-name, picture, upgrades+)>
+<!ELEMENT tab (tab-name, tab-column+)>
+<!ELEMENT tab-column (item+, width-factor?)>
+<!ELEMENT item (item-name, item-image, upgrades+)>
 <!ELEMENT upgrades (upgrade+)>
 <!ELEMENT upgrade (upgrade-name+, upgrade-effects+, upgrade-costs+)>
 <!ELEMENT upgrade-effects (effect+)>
 <!ELEMENT upgrade-costs (cost+)>
 <!ELEMENT tab-name (#PCDATA)>
+<!ELEMENT width-factor (#PCDATA)>
 <!ELEMENT item-name (#PCDATA)>
-<!ELEMENT picture (#PCDATA)>
+<!ELEMENT item-image (#PCDATA)>
 <!ELEMENT upgrade-name (#PCDATA)>
 <!ELEMENT effect (#PCDATA)>
 <!ELEMENT cost (#PCDATA)>

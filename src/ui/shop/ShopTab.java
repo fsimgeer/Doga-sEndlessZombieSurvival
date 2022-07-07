@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import components.ShopTabData;
 import doa.engine.scene.DoaObject;
-import renderers.ShopTabRenderer;
-import scripts.ShopTabBehaviour;
+import ui.shop.renderers.ShopTabRenderer;
+import ui.shop.scripts.ShopTabBehaviour;
 
 public class ShopTab extends DoaObject{
 	private static final long serialVersionUID = -918011328410815649L;

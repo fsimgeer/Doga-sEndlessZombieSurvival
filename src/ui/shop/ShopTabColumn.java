@@ -3,7 +3,7 @@ package ui.shop;
 import java.awt.Rectangle;
 
 import doa.engine.scene.DoaObject;
-import renderers.ShopTabColumnRenderer;
+import ui.shop.renderers.ShopTabColumnRenderer;
 
 public class ShopTabColumn extends DoaObject{
 	private static final long serialVersionUID = -8607278238202199155L;

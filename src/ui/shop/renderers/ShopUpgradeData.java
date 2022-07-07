@@ -1,4 +1,4 @@
-package renderers;
+package ui.shop.renderers;
 
 import doa.engine.scene.elements.renderers.DoaSpriteRenderer;
 

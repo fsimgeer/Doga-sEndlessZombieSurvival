@@ -4,8 +4,8 @@ import java.awt.Rectangle;
 
 import components.ShopItemData;
 import doa.engine.scene.DoaObject;
-import renderers.ShopItemRenderer;
-import scripts.ShopItemBehaviour;
+import ui.shop.renderers.ShopItemRenderer;
+import ui.shop.scripts.ShopItemBehaviour;
 
 public class ShopItem extends DoaObject{
 	private static final long serialVersionUID = -4098643700893307002L;

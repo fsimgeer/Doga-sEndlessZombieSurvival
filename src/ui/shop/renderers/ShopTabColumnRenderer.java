@@ -1,4 +1,4 @@
-package renderers;
+package ui.shop.renderers;
 
 import static doa.engine.core.DoaGraphicsFunctions.fill;
 import static doa.engine.core.DoaGraphicsFunctions.setColor;

@@ -1,4 +1,4 @@
-package scripts;
+package ui.shop.scripts;
 
 import doa.engine.input.DoaMouse;
 import doa.engine.scene.elements.scripts.DoaScript;

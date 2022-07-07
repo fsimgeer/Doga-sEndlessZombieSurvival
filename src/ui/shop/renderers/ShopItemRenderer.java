@@ -9,11 +9,11 @@ import static doa.engine.core.DoaGraphicsFunctions.setFont;
 import java.awt.Color;
 import java.awt.Rectangle;
 
-import components.ShopItemData;
 import doa.engine.graphics.DoaFonts;
 import doa.engine.graphics.DoaSprites;
 import doa.engine.scene.elements.renderers.DoaSpriteRenderer;
 import ui.shop.ShopItem;
+import ui.shop.data.ShopItemData;
 
 public class ShopItemRenderer extends DoaSpriteRenderer {
 	private static final long serialVersionUID = -1729714967661329528L;

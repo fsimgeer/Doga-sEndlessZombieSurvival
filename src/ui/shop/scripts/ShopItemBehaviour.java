@@ -1,4 +1,4 @@
-package scripts;
+package ui.shop.scripts;
 
 import components.ShopItemData;
 import doa.engine.input.DoaMouse;

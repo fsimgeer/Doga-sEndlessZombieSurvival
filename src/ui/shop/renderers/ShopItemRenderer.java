@@ -1,4 +1,4 @@
-package renderers;
+package ui.shop.renderers;
 
 import static doa.engine.core.DoaGraphicsFunctions.drawImage;
 import static doa.engine.core.DoaGraphicsFunctions.drawString;

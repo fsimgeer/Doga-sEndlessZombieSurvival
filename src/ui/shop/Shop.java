@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import components.ShopData;
 import doa.engine.scene.DoaObject;
-import renderers.ShopRenderer;
+import ui.shop.renderers.ShopRenderer;
 
 public class Shop extends DoaObject{
 	private static final long serialVersionUID = -4966597756746116724L;

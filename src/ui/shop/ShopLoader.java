@@ -2,6 +2,8 @@ package ui.shop;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -10,11 +12,12 @@ import org.jdom2.input.SAXBuilder;
 
 import doa.engine.log.DoaLogger;
 import doa.engine.scene.DoaScene;
+import ui.shop.data.IShopTabColumnData;
 import ui.shop.data.ShopData;
 import ui.shop.data.ShopItemData;
+import ui.shop.data.ShopTabColumnDataWithItems;
 import ui.shop.data.ShopTabData;
 import ui.shop.data.ShopUpgradeData;
-import ui.shop.upgrade.ShopUpgradeBank;
 
 public class ShopLoader {
 	
@@ -31,50 +34,68 @@ public class ShopLoader {
 	}
 	
 	private static ShopData createShop(File shopFile) throws JDOMException, IOException {
+		List<ShopTabData> tabs = new ArrayList<>();
+		
 		Document shopDocument = new SAXBuilder().build(shopFile);
 		Element shopElement = shopDocument.getRootElement();
-		ShopData shop = new ShopData();
 		shopElement.getChildren().forEach(tabElement -> {
-			ShopTabData shopTab = new ShopTabData();
-			shopTab.name = tabElement.getChildText("tab-name");
-			tabElement.getChildren("shop-item").forEach(shopItemElement -> {
+			String tabName = tabElement.getChildText("tab-name");
+			List<IShopTabColumnData> columns = new ArrayList<>();
+			tabElement.getChildren("tab-column").forEach(columnElement -> {
+				String columnName = tabElement.getChildText("column-name");
+				String contentName = tabElement.getChildText("content");
+				//float widthFactor = Float.parseFloat(tabElement.getChildText("width-factor"));
+				List<ShopItemData> items = new ArrayList<>();
 				
-				ShopItemData shopItem = new ShopItemData();
-				shopItem.name = shopItemElement.getChildText("item-name");
-				shopItem.picture = shopItemElement.getChildText("picture");
+				tabElement.getChildren("items").forEach(itemElement ->{
+					String itemName = itemElement.getChildText("item-name");
+					String imageName = itemElement.getChildText("item-image");
+					List<ShopUpgradeData> upgrades = new ArrayList<>();
+					List<Integer> costs = new ArrayList<>();
 
-				shopItemElement.getChild("upgrade-costs").getChildren("cost").forEach(costElement -> {
-					try{
-						int cost = Integer.parseInt(costElement.getText());
-						shopItem.costs.add(cost);
-					} catch(NumberFormatException ex){
-						DoaLogger.LOGGER.severe("cost - " + ex);
-					}
-				});
-				
-				shopItemElement.getChildren("upgrades").forEach(upgradesElement -> {
-					upgradesElement.getChildren("upgrade").forEach(upgradeElement -> {
-				
-						ShopUpgradeData shopUpgrade = new ShopUpgradeData();
-						shopUpgrade.action = ShopUpgradeBank.get(upgradeElement.getChildText("upgrade-action"));
-						shopUpgrade.name = upgradeElement.getChildText("upgrade-name");
-						upgradeElement.getChild("upgrade-effects").getChildren("effect").forEach(effectElement -> {
-							try{
-								int effect = Integer.parseInt(effectElement.getText());
-								shopUpgrade.effects.add(effect);
-							} catch(NumberFormatException ex){
-								DoaLogger.LOGGER.severe("effect - " + ex);
-							}
-							
-						});
-						
-						shopItem.upgrades.add(shopUpgrade);
+					itemElement.getChild("upgrade-costs").getChildren("cost").forEach(costElement -> {
+						try{
+							int cost = Integer.parseInt(costElement.getText());
+							costs.add(cost);
+						} catch(NumberFormatException ex){
+							DoaLogger.LOGGER.severe("cost - " + ex);
+						}
 					});
-				shopTab.items.add(shopItem);
+					
+					itemElement.getChildren("upgrades").forEach(upgradesElement -> {
+						upgradesElement.getChildren("upgrade").forEach(upgradeElement -> {
+							//shopUpgrade.action = ShopUpgradeBank.get(upgradeElement.getChildText("upgrade-action"));
+							String upgradeName = upgradeElement.getChildText("upgrade-name");
+							List<Integer> effects = new ArrayList<>();
+							upgradeElement.getChild("upgrade-effects").getChildren("effect").forEach(effectElement -> {
+								try{
+									int effect = Integer.parseInt(effectElement.getText());
+									effects.add(effect);
+								} catch(NumberFormatException ex){
+									DoaLogger.LOGGER.severe("effect - " + ex);
+								}
+								
+							});
+
+							ShopUpgradeData shopUpgrade = new ShopUpgradeData(upgradeName, effects);
+							upgrades.add(shopUpgrade);
+						});
+
+					});
+
+					ShopItemData shopItem = new ShopItemData(itemName, imageName, upgrades, costs);
+					items.add(shopItem);
 				});
+
+				//ShopTabColumnDataWithItems shopItem = new ShopItemData(columnName, contentName, widthFactor, items);
+				ShopTabColumnDataWithItems column = new ShopTabColumnDataWithItems(columnName, items);
+				columns.add(column);
 			});
-			shop.tabs.add(shopTab);
+			ShopTabData shopTab = new ShopTabData(tabName, columns);
+			tabs.add(shopTab);
 		});
+
+		ShopData shop = new ShopData(tabs);
 		return shop;
 	}
 }

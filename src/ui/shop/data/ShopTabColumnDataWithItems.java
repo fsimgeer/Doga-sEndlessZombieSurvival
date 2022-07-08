@@ -6,9 +6,13 @@ import ui.shop.ShopTabColumn;
 
 public final class ShopTabColumnDataWithItems implements IShopTabColumnData {
 
+	public final String name;
 	public final List<ShopItemData> items;
 	
-	public ShopTabColumnDataWithItems(List<ShopItemData> items) { this.items = items; }
+	public ShopTabColumnDataWithItems(String name, List<ShopItemData> items) {
+		this.name = name;
+		this.items = items;
+	}
 
 	@Override
 	public void onInit(ShopTabColumn column) { items.forEach(column::createShopItem); }

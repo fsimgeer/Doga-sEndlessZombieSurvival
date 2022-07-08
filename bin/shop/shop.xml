@@ -2,13 +2,16 @@
 <!DOCTYPE shop [
 <!ELEMENT shop (tab+)>
 <!ELEMENT tab (tab-name, tab-column+)>
-<!ELEMENT tab-column (item+, width-factor?)>
-<!ELEMENT item (item-name, item-image, upgrades+)>
+<!ELEMENT tab-column (column-name?, content?, width-factor?, items?)>
+<!ELEMENT items (item+)>
+<!ELEMENT item (item-name, item-image, upgrades?, upgrade-costs?)>
 <!ELEMENT upgrades (upgrade+)>
-<!ELEMENT upgrade (upgrade-name+, upgrade-effects+, upgrade-costs+)>
+<!ELEMENT upgrade (upgrade-name+, upgrade-effects+)>
 <!ELEMENT upgrade-effects (effect+)>
 <!ELEMENT upgrade-costs (cost+)>
 <!ELEMENT tab-name (#PCDATA)>
+<!ELEMENT column-name (#PCDATA)>
+<!ELEMENT content (#PCDATA)>
 <!ELEMENT width-factor (#PCDATA)>
 <!ELEMENT item-name (#PCDATA)>
 <!ELEMENT item-image (#PCDATA)>
@@ -20,315 +23,237 @@
 <shop>
 	<tab>
 		<tab-name>Character</tab-name>
-		<shop-item>
-			<item-name></item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>0</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name></upgrade-name>
-					<upgrade-effects>
-						<effect>0</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
+		<tab-column>
+			<column-name>Stats</column-name>
+			<content></content>
+		</tab-column>
+		<tab-column>
+			<content></content>
+		</tab-column>
 	</tab>
 	<tab>
 		<tab-name>Inventory</tab-name>
-		<shop-item>
-			<item-name></item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>0</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name></upgrade-name>
-					<upgrade-effects>
-						<effect>0</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
+		<tab-column>
+			<column-name>Equipped Weapon</column-name>
+			<item>
+				<item-name>my weapon</item-name>
+				<item-image>UnknownItem</item-image>
+			</item>
+		</tab-column>
+		<tab-column>
+			<column-name>My Auras etc.</column-name>
+			<item>
+				<item-name>Unknown 1</item-name>
+				<item-image>UnknownItem</item-image>
+			</item>
+			<item>
+				<item-name>Unknown 2</item-name>
+				<item-image>UnknownItem</item-image>
+			</item>
+		</tab-column>
+		<tab-column>
+			<column-name>Grenades and Items</column-name>
+			<item>
+				<item-name>Grenade 1</item-name>
+				<item-image>UnknownItem</item-image>
+			</item>
+			<item>
+				<item-name>Grenade 2</item-name>
+				<item-image>UnknownItem</item-image>
+			</item>
+			<item>
+				<item-name>Item 1</item-name>
+				<item-image>UnknownItem</item-image>
+			</item>
+			<item>
+				<item-name>Item 2</item-name>
+				<item-image>UnknownItem</item-image>
+			</item>
+		</tab-column>
 	</tab>
 	<tab>
 		<tab-name>Weapons</tab-name>
-		<shop-item>
-			<item-name>Pistol</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>50</cost>
-				<cost>100</cost>
-				<cost>150</cost>
-				<cost>200</cost>
-				<cost>250</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Damage</upgrade-name>
-					<upgrade-effects>
-						<effect>10</effect>
-						<effect>10</effect>
-						<effect>10</effect>
-						<effect>10</effect>
-						<effect>10</effect>
-					</upgrade-effects>
-				</upgrade>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Speed</upgrade-name>
-					<upgrade-effects>
-						<effect>1</effect>
-						<effect>2</effect>
-						<effect>3</effect>
-						<effect>4</effect>
-						<effect>5</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
-		<shop-item>
-			<item-name>Machine Gun</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>50</cost>
-				<cost>100</cost>
-				<cost>150</cost>
-				<cost>200</cost>
-				<cost>250</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Damage</upgrade-name>
-					<upgrade-effects>
-						<effect>10</effect>
-						<effect>10</effect>
-						<effect>10</effect>
-						<effect>10</effect>
-						<effect>10</effect>
-					</upgrade-effects>
-				</upgrade>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Speed</upgrade-name>
-					<upgrade-effects>
-						<effect>1</effect>
-						<effect>2</effect>
-						<effect>3</effect>
-						<effect>4</effect>
-						<effect>5</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
-		<shop-item>
-			<item-name>Shotgun</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>50</cost>
-				<cost>100</cost>
-				<cost>150</cost>
-				<cost>200</cost>
-				<cost>250</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Damage</upgrade-name>
-					<upgrade-effects>
-						<effect>10</effect>
-						<effect>10</effect>
-						<effect>10</effect>
-						<effect>10</effect>
-						<effect>10</effect>
-					</upgrade-effects>
-				</upgrade>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Speed</upgrade-name>
-					<upgrade-effects>
-						<effect>1</effect>
-						<effect>2</effect>
-						<effect>3</effect>
-						<effect>4</effect>
-						<effect>5</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
-		<shop-item>
-			<item-name>Sniper</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>50</cost>
-				<cost>100</cost>
-				<cost>150</cost>
-				<cost>200</cost>
-				<cost>250</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Damage</upgrade-name>
-					<upgrade-effects>
-						<effect>10</effect>
-						<effect>10</effect>
-						<effect>10</effect>
-						<effect>10</effect>
-						<effect>10</effect>
-					</upgrade-effects>
-				</upgrade>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Speed</upgrade-name>
-					<upgrade-effects>
-						<effect>1</effect>
-						<effect>2</effect>
-						<effect>3</effect>
-						<effect>4</effect>
-						<effect>5</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
+		<tab-column>
+			<item>
+				<item-name>Pistol</item-name>
+				<item-image>UnknownItem</item-image>
+				<upgrades>
+					<upgrade>
+						<upgrade-name>Damage</upgrade-name>
+						<upgrade-effects>
+							<effect>10</effect>
+							<effect>10</effect>
+							<effect>10</effect>
+							<effect>10</effect>
+							<effect>10</effect>
+						</upgrade-effects>
+					</upgrade>
+					<upgrade>
+						<upgrade-name>Speed</upgrade-name>
+						<upgrade-effects>
+							<effect>1</effect>
+							<effect>2</effect>
+							<effect>3</effect>
+							<effect>4</effect>
+							<effect>5</effect>
+						</upgrade-effects>
+					</upgrade>
+				</upgrades>
+				<upgrade-costs>
+					<cost>50</cost>
+					<cost>100</cost>
+					<cost>150</cost>
+					<cost>200</cost>
+					<cost>250</cost>
+				</upgrade-costs>
+			</item>
+			<item>
+				<item-name>Shotgun</item-name>
+				<item-image>UnknownItem</item-image>
+				<upgrades>
+					<upgrade>
+						<upgrade-name>Damage</upgrade-name>
+						<upgrade-effects>
+							<effect>10</effect>
+							<effect>10</effect>
+							<effect>10</effect>
+							<effect>10</effect>
+							<effect>10</effect>
+						</upgrade-effects>
+					</upgrade>
+					<upgrade>
+						<upgrade-name>Speed</upgrade-name>
+						<upgrade-effects>
+							<effect>1</effect>
+							<effect>2</effect>
+							<effect>3</effect>
+							<effect>4</effect>
+							<effect>5</effect>
+						</upgrade-effects>
+					</upgrade>
+				</upgrades>
+				<upgrade-costs>
+					<cost>50</cost>
+					<cost>100</cost>
+					<cost>150</cost>
+					<cost>200</cost>
+					<cost>250</cost>
+				</upgrade-costs>
+			</item>
+		</tab-column>
+		<tab-column>
+			<item>
+				<item-name>Machine Gun</item-name>
+				<item-image>UnknownItem</item-image>
+				<upgrades>
+					<upgrade>
+						<upgrade-name>Damage</upgrade-name>
+						<upgrade-effects>
+							<effect>10</effect>
+							<effect>10</effect>
+							<effect>10</effect>
+							<effect>10</effect>
+							<effect>10</effect>
+						</upgrade-effects>
+					</upgrade>
+					<upgrade>
+						<upgrade-name>Speed</upgrade-name>
+						<upgrade-effects>
+							<effect>1</effect>
+							<effect>2</effect>
+							<effect>3</effect>
+							<effect>4</effect>
+							<effect>5</effect>
+						</upgrade-effects>
+					</upgrade>
+				</upgrades>
+				<upgrade-costs>
+					<cost>50</cost>
+					<cost>100</cost>
+					<cost>150</cost>
+					<cost>200</cost>
+					<cost>250</cost>
+				</upgrade-costs>
+			</item>
+			<item>
+				<item-name>Sniper</item-name>
+				<item-image>UnknownItem</item-image>
+				<upgrades>
+					<upgrade>
+						<upgrade-name>Damage</upgrade-name>
+						<upgrade-effects>
+							<effect>10</effect>
+							<effect>10</effect>
+							<effect>10</effect>
+							<effect>10</effect>
+							<effect>10</effect>
+						</upgrade-effects>
+					</upgrade>
+					<upgrade>
+						<upgrade-name>Speed</upgrade-name>
+						<upgrade-effects>
+							<effect>1</effect>
+							<effect>2</effect>
+							<effect>3</effect>
+							<effect>4</effect>
+							<effect>5</effect>
+						</upgrade-effects>
+					</upgrade>
+				</upgrades>
+				<upgrade-costs>
+					<cost>50</cost>
+					<cost>100</cost>
+					<cost>150</cost>
+					<cost>200</cost>
+					<cost>250</cost>
+				</upgrade-costs>
+			</item>
+		</tab-column>
 	</tab>
 	<tab>
 		<tab-name>Items</tab-name>
-		<shop-item>
-			<item-name>Max Health Up</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>10</cost>
-				<cost>20</cost>
-				<cost>40</cost>
-				<cost>80</cost>
-				<cost>160</cost>
-				<cost>320</cost>
-				<cost>640</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>MaxHealthUpAction</upgrade-action>
-					<upgrade-name>Max Health</upgrade-name>
-					<upgrade-effects>
-						<effect>20</effect>
-						<effect>40</effect>
-						<effect>60</effect>
-						<effect>80</effect>
-						<effect>100</effect>
-						<effect>150</effect>
-						<effect>200</effect>
-					</upgrade-effects>
-					
-				</upgrade>
-			</upgrades>
-		</shop-item>
-		<shop-item>
-			<item-name>Heal</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>10</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>HealAction</upgrade-action>
-					<upgrade-name>Health</upgrade-name>
-					<upgrade-effects>
-						<effect>50</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
-		<shop-item>
-			<item-name>Armor Up</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>10</cost>
-				<cost>20</cost>
-				<cost>40</cost>
-				<cost>80</cost>
-				<cost>160</cost>
-				<cost>320</cost>
-				<cost>640</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Max Health</upgrade-name>
-					<upgrade-effects>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
-		<shop-item>
-			<item-name>Move Speed Up</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>10</cost>
-				<cost>20</cost>
-				<cost>40</cost>
-				<cost>80</cost>
-				<cost>160</cost>
-				<cost>320</cost>
-				<cost>640</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Move Speed</upgrade-name>
-					<upgrade-effects>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
-		<shop-item>
-			<item-name>Blob</item-name>
-			<picture>UnknownItem</picture>
-			<upgrade-costs>
-				<cost>10</cost>
-				<cost>20</cost>
-				<cost>40</cost>
-				<cost>80</cost>
-				<cost>160</cost>
-				<cost>320</cost>
-				<cost>640</cost>
-			</upgrade-costs>
-			<upgrades>
-				<upgrade>
-					<upgrade-action>UnknownAction</upgrade-action>
-					<upgrade-name>Blup</upgrade-name>
-					<upgrade-effects>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-						<effect>50</effect>
-					</upgrade-effects>
-				</upgrade>
-			</upgrades>
-		</shop-item>
+		<tab-column>
+			<width-factor>0.6</width-factor>
+			<column-name>Grenades</column-name>
+			<item>
+				<item-name>Grenade 1</item-name>
+				<item-image>UnknownItem</item-image>
+				<upgrade-costs>
+					<cost>100</cost>
+				</upgrade-costs>
+			</item>
+			<item>
+				<item-name>Grenade 2</item-name>
+				<item-image>UnknownItem</item-image>
+				<upgrade-costs>
+					<cost>100</cost>
+				</upgrade-costs>
+			</item>
+			<item>
+				<item-name>Grenade 3</item-name>
+				<item-image>UnknownItem</item-image>
+				<upgrade-costs>
+					<cost>100</cost>
+				</upgrade-costs>
+			</item>
+		</tab-column>
+		<tab-column>
+			<width-factor>0.4</width-factor>
+			<column-name>Auras</column-name>
+			<item>
+				<item-name>Aura 1</item-name>
+				<item-image>UnknownItem</item-image>
+				<upgrade-costs>
+					<cost>100</cost>
+				</upgrade-costs>
+			</item>
+			<item>
+				<item-name>Aura 2</item-name>
+				<item-image>UnknownItem</item-image>
+				<upgrade-costs>
+					<cost>100</cost>
+				</upgrade-costs>
+			</item>
+		</tab-column>
 	</tab>
 </shop>

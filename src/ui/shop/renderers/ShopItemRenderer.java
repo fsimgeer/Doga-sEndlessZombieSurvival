@@ -29,14 +29,14 @@ public class ShopItemRenderer extends DoaSpriteRenderer {
 	
 	public ShopItemRenderer(ShopItem item) {
 		this.item = item;
-		this.itemData = item.itemData;
-		this.bounds = item.bounds;
+		//this.itemData = item.itemData;
+		//this.bounds = item.bounds;
 		this.innerBounds = new Rectangle(bounds.x + 10, bounds.y + 10, bounds.width - 20, bounds.height - 20);
 	}
 	
 	@Override
 	public void render() {
-		if(item.tab.isSelected()) {
+		//if(item.tab.isSelected()) {
 			// setting font
 			setFont(DoaFonts.getFont("Soup").deriveFont(36f));
 			
@@ -57,7 +57,7 @@ public class ShopItemRenderer extends DoaSpriteRenderer {
 			fill(innerBounds);*/
 
 			// item image
-			drawImage(DoaSprites.getSprite(itemData.picture),
+			drawImage(DoaSprites.getSprite(itemData.imageName),
 			        (float) innerBounds.x + 10,
 			        (float) (innerBounds.y + 10),
 			        115, 115);
@@ -66,11 +66,11 @@ public class ShopItemRenderer extends DoaSpriteRenderer {
 			setColor(Color.BLACK);
 			drawString(itemData.name, (int)innerBounds.getMinX() + 130, (int)innerBounds.getMinY() + 32);
 			
-			if (itemData.numOfUpgrades < itemData.costs.size()) {
+			/*if (itemData.numOfUpgrades < itemData.costs.size()) {
 				drawString("Cost: " + itemData.costs.get(itemData.numOfUpgrades), (int)innerBounds.getMinX() + 130, (int)innerBounds.getMinY() + 82);
 			} else {
 				drawString("Cost: MAX", (int)innerBounds.getMinX() + 130, (int)innerBounds.getMinY() + 82);
-			}
+			}*/
 			
 			// item upgrade effects
 			if(alphaDirectionUp)
@@ -100,7 +100,7 @@ public class ShopItemRenderer extends DoaSpriteRenderer {
 
 			// upgrade boxes (outer) which show the number of upgrades
 			setColor(new Color(0, 0, 0, 100));
-			for (int k = 0; k < itemData.costs.size(); k++) {
+			/*for (int k = 0; k < itemData.costs.size(); k++) {
 				if(itemData.costs.size() > 1)
 					fill(new Rectangle(innerBounds.x + 15 + k * 40, (int)innerBounds.getMaxY() - 40, 20, 20));
 			}
@@ -110,7 +110,7 @@ public class ShopItemRenderer extends DoaSpriteRenderer {
 			for (int k = 0; k < itemData.numOfUpgrades; k++) {
 				if(itemData.costs.size() > 1)
 					fill(new Rectangle(innerBounds.x + 20 + k * 40, (int)innerBounds.getMaxY() - 35, 10, 10));
-			}
-		}
+			}*/
+		//}
 	}
 }

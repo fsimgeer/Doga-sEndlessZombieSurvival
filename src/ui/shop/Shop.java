@@ -48,10 +48,10 @@ public class Shop extends DoaObject {
 	}
 
 	public void initializeTabs() {
-		int tab1ColCount = 2;
-		int tab2ColCount = 3;
-		int tab3ColCount = 2;
-		int tab4ColCount = 2;
+		int tab1ColCount = shopData.tabs.get(0).columns.size();
+		int tab2ColCount = shopData.tabs.get(1).columns.size();
+		int tab3ColCount = shopData.tabs.get(2).columns.size();
+		int tab4ColCount = shopData.tabs.get(3).columns.size();
 		
 		createShopTab(tab1ColCount);
 		createShopTab(tab2ColCount);

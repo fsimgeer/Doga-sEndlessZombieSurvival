@@ -35,7 +35,7 @@ public class Bullet extends DoaObject {
 				@Override
 				public void onTriggerEnter(DoaObject entered, DoaObject enterer) {
 					if (enterer instanceof Enemy enemy) {
-						enemy.lifeScript.life -= weapon.getBulletDamage();
+						enemy.TakeDamage(weapon.getBulletDamage());
 						if (!weapon.isUsingPiercingRounds()) {
 							delete(Bullet.this);
 						}
@@ -57,7 +57,7 @@ public class Bullet extends DoaObject {
 				@Override
 				public void onTriggerEnter(DoaObject entered, DoaObject enterer) {
 					if (enterer instanceof Enemy enemy) {
-						enemy.lifeScript.life -= weapon.getBulletDamage();
+						enemy.TakeDamage(weapon.getBulletDamage());
 						if (!weapon.isUsingPiercingRounds()) {
 							delete(Bullet.this);
 						}

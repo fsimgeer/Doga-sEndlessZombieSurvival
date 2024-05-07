@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.prefs.Preferences;
 
 import org.jdom2.Document;
 import org.jdom2.Element;

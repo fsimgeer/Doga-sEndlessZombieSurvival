@@ -18,10 +18,13 @@ import java.awt.Color;
 import components.PlayerData;
 import doa.engine.graphics.DoaFonts;
 import doa.engine.scene.elements.renderers.DoaRenderer;
+import event.IEvent;
+import event.IEventListener;
+import event.PlayerDataChanged;
+import event.WaveStarted;
 import objects.EnemySpawner;
-import objects.Player;
 
-public class HUDRenderer extends DoaRenderer {
+public class HUDRenderer extends DoaRenderer implements IEventListener {
 
 	private static final long serialVersionUID = -8237946402686130597L;
 
@@ -35,44 +38,62 @@ public class HUDRenderer extends DoaRenderer {
 	private static final String LEVEL = "Level: ";
 	private static final String SCORE = "Score: ";
 
-	public HUDRenderer() {}
+	private float playerHealth;
+	private float playerHealthMax;
+	private float playerCoins;
+	private float playerScore;
+
+	private int waveNumber;
 
 	@Override
 	public void render() {
-		PlayerData pd = (PlayerData) Player.getInstance().getComponentByType(PlayerData.class).get();
 		pushTransform();
 		rotate((float) Math.PI, 1920f / 2, 1080f / 2);
 		setColor(TRANSLUCENT_GRAY);
-		fillRect(1920 - 60 - 3, 20 - 3, 50 + 6, pd.getHealthMAX() + 6);
+		fillRect(1920 - 60 - 3, 20 - 3, 50 + 6, playerHealthMax + 6);
 		setColor(TRANSLUCENT_GREEN);
-		fillRect(1920 - 60, 20, 50, pd.getHealth());
+		fillRect(1920 - 60, 20, 50, playerHealth);
 		pushStroke();
 		setStroke(new BasicStroke(4));
 		setColor(TRANSLUCENT_DARK_GREEN);
-		drawRect(1920 - 60, 20, 50, pd.getHealth());
+		drawRect(1920 - 60, 20, 50, playerHealth);
 		popStroke();
 		popTransform();
 
 		setFont(DoaFonts.getFont("Soup").deriveFont(36f));
 
 		setColor(GRAY);
-		drawString(COINS + pd.getCoins(), 69, 1080 - 81);
-		drawString(COINS + pd.getCoins(), 69, 1080 - 79);
-		drawString(COINS + pd.getCoins(), 71, 1080 - 81);
-		drawString(COINS + pd.getCoins(), 71, 1080 - 79);
-		drawString(LEVEL + EnemySpawner.getDifficulty(), 69, 1080 - 51);
-		drawString(LEVEL + EnemySpawner.getDifficulty(), 69, 1080 - 49);
-		drawString(LEVEL + EnemySpawner.getDifficulty(), 71, 1080 - 51);
-		drawString(LEVEL + EnemySpawner.getDifficulty(), 71, 1080 - 49);
-		drawString(SCORE + pd.getScore(), 69, 1080 - 21);
-		drawString(SCORE + pd.getScore(), 69, 1080 - 19);
-		drawString(SCORE + pd.getScore(), 71, 1080 - 21);
-		drawString(SCORE + pd.getScore(), 71, 1080 - 19);
+		drawString(COINS + playerCoins, 69, 1080 - 81);
+		drawString(COINS + playerCoins, 69, 1080 - 79);
+		drawString(COINS + playerCoins, 71, 1080 - 81);
+		drawString(COINS + playerCoins, 71, 1080 - 79);
+		drawString(LEVEL + waveNumber, 69, 1080 - 51);
+		drawString(LEVEL + waveNumber, 69, 1080 - 49);
+		drawString(LEVEL + waveNumber, 71, 1080 - 51);
+		drawString(LEVEL + waveNumber, 71, 1080 - 49);
+		drawString(SCORE + playerScore, 69, 1080 - 21);
+		drawString(SCORE + playerScore, 69, 1080 - 19);
+		drawString(SCORE + playerScore, 71, 1080 - 21);
+		drawString(SCORE + playerScore, 71, 1080 - 19);
 
 		setColor(ORANGE);
-		drawString(COINS + pd.getCoins(), 70, 1080 - 80);
-		drawString(LEVEL + EnemySpawner.getDifficulty(), 70, 1080 - 50);
-		drawString(SCORE + pd.getScore(), 70, 1080 - 20);
+		drawString(COINS + playerCoins, 70, 1080 - 80);
+		drawString(LEVEL + waveNumber, 70, 1080 - 50);
+		drawString(SCORE + playerScore, 70, 1080 - 20);
 	}
 
+	@Override
+	public void onEventReceived(IEvent event) {
+		if (event instanceof PlayerDataChanged) {
+			PlayerData pd = (PlayerData) event.getEventData();
+			playerHealth = pd.getHealth();
+			playerHealthMax = pd.getHealthMAX();
+			playerCoins = pd.getCoins();
+			playerScore = pd.getScore();
+		}
+		if (event instanceof WaveStarted) {
+			EnemySpawner es = (EnemySpawner) event.getEventData();
+			waveNumber = es.Difficulty;
+		}
+	}
 }

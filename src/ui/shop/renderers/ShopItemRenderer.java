@@ -2,7 +2,6 @@ package ui.shop.renderers;
 
 import static doa.engine.core.DoaGraphicsFunctions.drawImage;
 import static doa.engine.core.DoaGraphicsFunctions.drawString;
-import static doa.engine.core.DoaGraphicsFunctions.fill;
 import static doa.engine.core.DoaGraphicsFunctions.setColor;
 import static doa.engine.core.DoaGraphicsFunctions.setFont;
 

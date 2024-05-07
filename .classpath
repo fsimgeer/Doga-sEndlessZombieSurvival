@@ -17,6 +17,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/Doga&apos;sEndlessZombieSurvivall/lib/JDOM/jdom-2.0.6-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/lombok"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Lombok"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

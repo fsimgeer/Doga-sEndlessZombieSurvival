@@ -8,11 +8,11 @@ import doa.engine.scene.DoaObject;
 import doa.engine.scene.DoaScene;
 import doa.engine.scene.DoaSceneHandler;
 import doa.engine.scene.elements.renderers.DoaSpriteRenderer;
+import event.EventDispatcher;
 import objects.EnemySpawner;
 import objects.Player;
 import objects.Wall;
 import renderers.HUDRenderer;
-import ui.shop.Shop;
 import ui.shop.ShopLoader;
 
 public class LevelLoader {
@@ -20,12 +20,25 @@ public class LevelLoader {
 	public static final int BLOCK_WIDTH = 32;
 	public static final int BLOCK_HEIGHT = 32;
 
-	private LevelLoader() {}
+	private EventDispatcher dispatcher;
 
-	public static void loadLevel(final BufferedImage mapData, final BufferedImage map) {
+	public LevelLoader(EventDispatcher dispatcher) {
+		this.dispatcher = dispatcher;
+	}
+
+	public void loadLevel(final BufferedImage mapData, final BufferedImage map) {
 		DoaScene loaded = DoaSceneHandler.getLoadedScene();
 		loaded.clear();
-		loaded.add(new EnemySpawner());
+		Player p = new Player(300, 300);
+		loaded.add(p);
+		dispatcher.RegisterListener(p);
+		DoaCamera.adjustCamera(p, 0, 0, map.getWidth(), map.getHeight());
+		DoaCamera.setTweenAmountX(0.01f);
+		DoaCamera.setTweenAmountY(0.01f);
+
+		EnemySpawner es = new EnemySpawner(dispatcher, p.transform);
+		loaded.add(es);
+		dispatcher.RegisterListener(es);
 		final int w = mapData.getWidth();
 		final int h = mapData.getHeight();
 		for (int x = 0; x < w; x++) {
@@ -41,7 +54,7 @@ public class LevelLoader {
 					// o = Builders.PB.args((float) x * BLOCK_WIDTH, (float) y *
 					// BLOCK_HEIGHT).instantiate();
 				} else if (red == 255 && blue == 255) {
-					EnemySpawner.newSpawnerAt(x * BLOCK_WIDTH, y * BLOCK_HEIGHT);
+					es.createNewSpawnerAt(x * BLOCK_WIDTH, y * BLOCK_HEIGHT);
 				}
 				if (o != null) {
 					loaded.add(o);
@@ -56,17 +69,12 @@ public class LevelLoader {
 
 		loaded.add(level);
 
-		Player p = new Player(300, 300);
-		loaded.add(p);
-		DoaCamera.adjustCamera(p, 0, 0, map.getWidth(), map.getHeight());
-		DoaCamera.setTweenAmountX(0.01f);
-		DoaCamera.setTweenAmountY(0.01f);
-
 		DoaObject hud = new DoaObject().makeStatic();
 		HUDRenderer hudr = new HUDRenderer();
 		hud.addComponent(hudr);
 		loaded.add(hud);
-		
+		dispatcher.RegisterListener(hudr);
+
 		ShopLoader.createShop(loaded);
 	}
 }

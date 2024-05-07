@@ -31,19 +31,19 @@ public class Shop extends DoaObject {
 
 	public final Rectangle closeButton = new Rectangle(X + SHOP_WIDTH - 120, Y + SHOP_HEIGHT - 60, 100, 40);
 	private int selectedTab;
-	
+
 	private ArrayList<ShopTab> tabs = new ArrayList<>();
-	
+
 	final int tabTitleWidth;
 	private static final int SHOP_TITLE_HEIGHT = 50;
 	final Rectangle bounds = new Rectangle(X, Y + SHOP_TITLE_HEIGHT, SHOP_WIDTH, SHOP_HEIGHT - SHOP_TITLE_HEIGHT);
-	
+
 	public Shop(ShopData shopData) {
 		this.shopData = shopData;
 		setzOrder(1000);
 		addComponent(new Renderer());
 		makeStatic();
-		
+
 		tabTitleWidth = SHOP_WIDTH / shopData.tabs.size();
 	}
 
@@ -52,26 +52,26 @@ public class Shop extends DoaObject {
 		int tab2ColCount = shopData.tabs.get(1).columns.size();
 		int tab3ColCount = shopData.tabs.get(2).columns.size();
 		int tab4ColCount = shopData.tabs.get(3).columns.size();
-		
+
 		createShopTab(tab1ColCount);
 		createShopTab(tab2ColCount);
 		createShopTab(tab3ColCount);
 		createShopTab(tab4ColCount);
-		
+
 		setSelectedTab(0);
 	}
-	
+
 	private void createShopTab(int colCount) {
 		int index = tabs.size();
-		
+
 		Rectangle titleBounds = new Rectangle(X + index * tabTitleWidth, Y, tabTitleWidth, SHOP_TITLE_HEIGHT);
 		ShopTab tab = new ShopTab(this, shopData.tabs.get(index), titleBounds, bounds);
-		
+
 		getScene().add(tab);
-		
+
 		tabs.add(tab);
 	}
-	
+
 	public ShopTab getSelectedTab() { return tabs.get(selectedTab); }
 
 	public void setSelectedTab(int index) { selectedTab = index; }
@@ -82,13 +82,13 @@ public class Shop extends DoaObject {
 		}
 		selectedTab = idx;
 	}
-	
+
 	private class Renderer extends DoaRenderer {
 
 		private static final long serialVersionUID = 8536737218483830680L;
-				
+
 		private DoaVector margins = new DoaVector(120, 30);
-		
+
 		@Override
 		public void render() {
 			/* Render grey bg */

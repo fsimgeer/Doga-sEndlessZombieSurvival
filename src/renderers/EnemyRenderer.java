@@ -8,6 +8,8 @@ import doa.engine.scene.elements.renderers.DoaSpriteRenderer;
 
 public class EnemyRenderer extends DoaSpriteRenderer {
 
+	private static final long serialVersionUID = 3589837904184564944L;
+
 	@Override
 	public void render() {
 		pushTransform();

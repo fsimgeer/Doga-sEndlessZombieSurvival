@@ -21,6 +21,7 @@ import event.EnemyTargetOverridden;
 import event.EventDispatcher;
 import event.IEvent;
 import event.IEventListener;
+import globals.Layers;
 import renderers.EnemyRenderer;
 
 public class Enemy extends DoaObject {
@@ -62,6 +63,8 @@ public class Enemy extends DoaObject {
 		addComponent(Life);
 
 		this.dispatcher = dispatcher;
+
+		setzOrder(Layers.ENEMY);
 	}
 
 	public void TakeDamage(float bulletDamage) { Life.life -= bulletDamage; }

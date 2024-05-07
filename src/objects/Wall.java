@@ -5,6 +5,7 @@ import doa.engine.scene.DoaObject;
 import doa.engine.scene.elements.physics.DoaBodyType;
 import doa.engine.scene.elements.physics.DoaBoxCollider;
 import doa.engine.scene.elements.physics.DoaRigidBody;
+import globals.Layers;
 
 public class Wall extends DoaObject {
 
@@ -22,6 +23,8 @@ public class Wall extends DoaObject {
 		b.mass = 100;
 		b.debugRender = true;
 		addComponent(b);
+
+		setzOrder(Layers.WALL);
 	}
 
 }

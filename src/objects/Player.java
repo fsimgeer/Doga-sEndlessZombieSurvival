@@ -16,6 +16,7 @@ import doa.engine.scene.elements.scripts.DoaMouseAdapter;
 import event.EnemyDied;
 import event.IEvent;
 import event.IEventListener;
+import globals.Layers;
 import renderers.PlayerRenderer;
 
 public class Player extends DoaObject implements IEventListener {
@@ -63,11 +64,13 @@ public class Player extends DoaObject implements IEventListener {
 		addComponent(b);
 
 		addComponent(new PlayerMouse(this));
+
+		setzOrder(Layers.PLAYER);
 	}
 
 	@Override
 	public void onEventReceived(IEvent event) {
-		if (event.getEventData() instanceof EnemyDied) {
+		if (event instanceof EnemyDied) {
 			//EnemyDied ed = (EnemyDied) event.getEventData();
 
 			//Data.setCoins((int)(Data.getCoins() + Math.max(1, Math.ceil(EnemySpawner.getDifficulty() / Math.PI))));

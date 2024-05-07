@@ -20,22 +20,16 @@ import ui.shop.data.ShopTabData;
 import ui.shop.data.ShopUpgradeData;
 
 public class ShopLoader {
-	
+
 	private ShopLoader() {}
-	
+
 	public static void createShop(DoaScene scene) {
-		try {
-			Shop s = new Shop(createShop(new File("res/shop/shop.xml")));
-			scene.add(s);
-			s.initializeTabs();
-		} catch (JDOMException | IOException ex) {
-			ex.printStackTrace();
-		}
+
 	}
-	
+
 	private static ShopData createShop(File shopFile) throws JDOMException, IOException {
 		List<ShopTabData> tabs = new ArrayList<>();
-		
+
 		Document shopDocument = new SAXBuilder().build(shopFile);
 		Element shopElement = shopDocument.getRootElement();
 		shopElement.getChildren().forEach(tabElement -> {
@@ -46,7 +40,7 @@ public class ShopLoader {
 				String contentName = tabElement.getChildText("content");
 				//float widthFactor = Float.parseFloat(tabElement.getChildText("width-factor"));
 				List<ShopItemData> items = new ArrayList<>();
-				
+
 				tabElement.getChildren("items").forEach(itemElement ->{
 					String itemName = itemElement.getChildText("item-name");
 					String imageName = itemElement.getChildText("item-image");
@@ -61,7 +55,7 @@ public class ShopLoader {
 							DoaLogger.LOGGER.severe("cost - " + ex);
 						}
 					});
-					
+
 					itemElement.getChildren("upgrades").forEach(upgradesElement -> {
 						upgradesElement.getChildren("upgrade").forEach(upgradeElement -> {
 							//shopUpgrade.action = ShopUpgradeBank.get(upgradeElement.getChildText("upgrade-action"));
@@ -74,7 +68,7 @@ public class ShopLoader {
 								} catch(NumberFormatException ex){
 									DoaLogger.LOGGER.severe("effect - " + ex);
 								}
-								
+
 							});
 
 							ShopUpgradeData shopUpgrade = new ShopUpgradeData(upgradeName, effects);

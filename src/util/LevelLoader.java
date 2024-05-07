@@ -9,6 +9,7 @@ import doa.engine.scene.DoaScene;
 import doa.engine.scene.DoaSceneHandler;
 import doa.engine.scene.elements.renderers.DoaSpriteRenderer;
 import event.EventDispatcher;
+import globals.Layers;
 import objects.EnemySpawner;
 import objects.Player;
 import objects.Wall;
@@ -62,6 +63,7 @@ public class LevelLoader {
 			}
 		}
 		DoaObject level = new DoaObject();
+		level.setzOrder(Layers.BACKGROUND);
 
 		DoaSpriteRenderer r = new DoaSpriteRenderer();
 		r.setSprite(map);

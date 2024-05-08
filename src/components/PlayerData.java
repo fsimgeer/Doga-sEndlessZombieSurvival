@@ -31,7 +31,7 @@ public class PlayerData extends DoaScript {
 			health = healthMAX;
 		health = newHealth;
 	}
-	
+
 	public int getHealthMAX() { return (int) healthMAX; }
 	public void setHealthMAX(int newMax) {
 		float percentage = health / healthMAX;
@@ -41,7 +41,7 @@ public class PlayerData extends DoaScript {
 
 	public float getSpeed() { return speed; }
 	public void setSpeed(float newSpeed) { speed = newSpeed; }
-	
+
 	public int getCoins() { return coins; }
 	public void setCoins(int newCoins) {
 		if(newCoins < 0) return;
@@ -50,7 +50,7 @@ public class PlayerData extends DoaScript {
 
 	public int getScore() { return score; }
 	public void setScore(int newScore) { score = newScore; }
-	
+
 	public float getHealthDecay() { return healthDecay; }
 	public void setHealthDecay(float newHealthDecay) { healthDecay = newHealthDecay; }
 

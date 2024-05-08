@@ -16,6 +16,7 @@ import doa.engine.scene.elements.scripts.DoaMouseAdapter;
 import event.EnemyDied;
 import event.IEvent;
 import event.IEventListener;
+import event.PlayerDied;
 import globals.Layers;
 import renderers.PlayerRenderer;
 
@@ -71,6 +72,12 @@ public class Player extends DoaObject implements IEventListener {
 	@Override
 	public void onEventReceived(IEvent event) {
 		if (event instanceof EnemyDied) {
+			//EnemyDied ed = (EnemyDied) event.getEventData();
+
+			//Data.setCoins((int)(Data.getCoins() + Math.max(1, Math.ceil(EnemySpawner.getDifficulty() / Math.PI))));
+			//Data.setScore((int)(Data.getScore() + EnemySpawner.getDifficulty() * Math.PI));
+		}
+		if (event instanceof PlayerDied) {
 			//EnemyDied ed = (EnemyDied) event.getEventData();
 
 			//Data.setCoins((int)(Data.getCoins() + Math.max(1, Math.ceil(EnemySpawner.getDifficulty() / Math.PI))));

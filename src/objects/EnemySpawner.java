@@ -53,7 +53,7 @@ public class EnemySpawner extends DoaObject implements IEventListener {
 
 	public EnemySpawner(EventDispatcher dispatcher, DoaTransform enemyTargetTransform) {
 		scheduler = new EnemySpawnerScheduler(this);
-		scheduler.debugRender = true;
+		scheduler.enableDebugRender = true;
 		addComponent(scheduler);
 
 		setzOrder(100);

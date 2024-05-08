@@ -60,7 +60,7 @@ public class Player extends DoaObject implements IEventListener {
 		}.makeTrigger());
 
 		b.fixedRotation = true;
-		b.debugRender = true;
+		b.enableDebugRender = true;
 		addComponent(b);
 
 		addComponent(new PlayerMouse(this));

@@ -21,7 +21,7 @@ public class Wall extends DoaObject {
 		b.type = DoaBodyType.STATIC;
 		b.colliders.add(new DoaBoxCollider(new DoaVector(width, height), new DoaVector(width / 2, height / 2)));
 		b.mass = 100;
-		b.debugRender = true;
+		b.enableDebugRender = true;
 		addComponent(b);
 
 		setzOrder(Layers.WALL);

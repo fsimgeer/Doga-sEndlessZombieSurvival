@@ -41,7 +41,7 @@ public class Enemy extends DoaObject {
 		transform.position.y = y;
 
 		ChaseTarget cp = new ChaseTarget(chaseTarget);
-		cp.debugRender = true;
+		cp.enableDebugRender = true;
 		cp.size = SIZE;
 		addComponent(cp);
 		dispatcher.RegisterListener(cp);
@@ -56,7 +56,7 @@ public class Enemy extends DoaObject {
 		b.colliders.add(new DoaCircleCollider(SIZE / 2));
 		b.fixedRotation = true;
 		b.mass = 10;
-		b.debugRender = true;
+		b.enableDebugRender = true;
 		addComponent(b);
 
 		Life = new Life(this, 10);

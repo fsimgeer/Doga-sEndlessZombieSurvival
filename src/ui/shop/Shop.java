@@ -20,10 +20,8 @@ import event.ShopClosed;
 import event.WaveEnded;
 import ui.shop.data.ShopData;
 import ui.elements.Button;
-import ui.elements.Observable;
-import ui.elements.Observer;
 
-public class Shop extends DoaObject implements Observer, IEventListener {
+public class Shop extends DoaObject implements IEventListener {
 	private static final long serialVersionUID = -4966597756746116724L;
 
 	public ShopData shopData;
@@ -144,12 +142,6 @@ public class Shop extends DoaObject implements Observer, IEventListener {
 
 			setFont(DoaFonts.getFont("Soup").deriveFont(36f));
 		}
-	}
-
-	@Override
-	public void onNotify(Observable b) {
-		isHidden = false;
-		closeButton.setVisible(true);
 	}
 
 	@Override

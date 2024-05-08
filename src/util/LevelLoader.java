@@ -77,6 +77,6 @@ public class LevelLoader {
 		loaded.add(hud);
 		dispatcher.RegisterListener(hudr);
 
-		ShopLoader.createShop(loaded);
+		ShopLoader.createShop(dispatcher, loaded);
 	}
 }

@@ -69,6 +69,8 @@ public class ShopTabColumn extends DoaObject {
 		
 		@Override
 		public void render() {
+			if(Shop.isHidden) return;
+			
 			if (!tab.isSelected()) { return; }
 			setColor(Color.RED);
 			fill(contentBounds);

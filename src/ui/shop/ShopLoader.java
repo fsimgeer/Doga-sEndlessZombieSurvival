@@ -12,6 +12,7 @@ import org.jdom2.input.SAXBuilder;
 
 import doa.engine.log.DoaLogger;
 import doa.engine.scene.DoaScene;
+import event.EventDispatcher;
 import ui.shop.data.IShopTabColumnData;
 import ui.shop.data.ShopData;
 import ui.shop.data.ShopItemData;
@@ -23,8 +24,14 @@ public class ShopLoader {
 
 	private ShopLoader() {}
 
-	public static void createShop(DoaScene scene) {
-
+	public static void createShop(EventDispatcher dispatcher, DoaScene scene) {
+		try {
+			Shop s = new Shop(dispatcher, createShop(new File("res/shop/shop.xml")));
+			scene.add(s);
+			s.initializeTabs();
+		} catch (JDOMException | IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	private static ShopData createShop(File shopFile) throws JDOMException, IOException {

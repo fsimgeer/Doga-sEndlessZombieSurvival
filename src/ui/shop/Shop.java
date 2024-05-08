@@ -1,7 +1,5 @@
 package ui.shop;
 
-import static doa.engine.core.DoaGraphicsFunctions.drawString;
-import static doa.engine.core.DoaGraphicsFunctions.fill;
 import static doa.engine.core.DoaGraphicsFunctions.fillRect;
 import static doa.engine.core.DoaGraphicsFunctions.setColor;
 import static doa.engine.core.DoaGraphicsFunctions.setFont;
@@ -13,10 +11,19 @@ import java.util.ArrayList;
 import doa.engine.graphics.DoaFonts;
 import doa.engine.maths.DoaVector;
 import doa.engine.scene.DoaObject;
+import doa.engine.scene.DoaScene;
 import doa.engine.scene.elements.renderers.DoaRenderer;
+import event.EventDispatcher;
+import event.IEvent;
+import event.IEventListener;
+import event.ShopClosed;
+import event.WaveEnded;
 import ui.shop.data.ShopData;
+import ui.elements.Button;
+import ui.elements.Observable;
+import ui.elements.Observer;
 
-public class Shop extends DoaObject {
+public class Shop extends DoaObject implements Observer, IEventListener {
 	private static final long serialVersionUID = -4966597756746116724L;
 
 	public ShopData shopData;
@@ -28,8 +35,12 @@ public class Shop extends DoaObject {
 
 	public static final int DIST_BETWEEN_ITEMS = 30;
 	public static final int COLUMN_ITEM_COUNT = 2;
+	
+	public static boolean isHidden = true;
 
-	public final Rectangle closeButton = new Rectangle(X + SHOP_WIDTH - 120, Y + SHOP_HEIGHT - 60, 100, 40);
+	public final Rectangle closeButtonCA = new Rectangle(X + SHOP_WIDTH - 120, Y + SHOP_HEIGHT - 45, 100, 40);
+	public final DoaVector closeButtonPosition = new DoaVector(X + SHOP_WIDTH - 120, Y + SHOP_HEIGHT - 45);
+	
 	private int selectedTab;
 
 	private ArrayList<ShopTab> tabs = new ArrayList<>();
@@ -37,14 +48,43 @@ public class Shop extends DoaObject {
 	final int tabTitleWidth;
 	private static final int SHOP_TITLE_HEIGHT = 50;
 	final Rectangle bounds = new Rectangle(X, Y + SHOP_TITLE_HEIGHT, SHOP_WIDTH, SHOP_HEIGHT - SHOP_TITLE_HEIGHT);
+	
+	public final Rectangle openButton = new Rectangle(SHOP_WIDTH, Y - 45, 100, 40);
+	private Button closeButton;
 
-	public Shop(ShopData shopData) {
+	private EventDispatcher dispatcher;
+	
+	public Shop(EventDispatcher dispatcher, ShopData shopData) {
 		this.shopData = shopData;
 		setzOrder(1000);
 		addComponent(new Renderer());
 		makeStatic();
+		
+		this.dispatcher = dispatcher;
+		dispatcher.RegisterListener(this);
 
 		tabTitleWidth = SHOP_WIDTH / shopData.tabs.size();
+		
+		/* Play Offline Button */
+		closeButton = Button
+			.builder()
+			.textKey("CLOSE")
+			.contentArea(closeButtonCA)
+			.action(source -> {
+				HideShopScreen();
+				dispatcher.DispatchEvent(new ShopClosed());
+			})
+			.build();
+		//closeButton.setPosition(closeButtonPosition);
+		/* --------------- */
+	}
+	
+	@Override
+	public void onAddToScene(final DoaScene scene) {
+		super.onAddToScene(scene);
+
+		scene.add(closeButton);
+		closeButton.setzOrder(2000);
 	}
 
 	public void initializeTabs() {
@@ -82,26 +122,42 @@ public class Shop extends DoaObject {
 		}
 		selectedTab = idx;
 	}
-
+	
+	public void HideShopScreen() {
+		isHidden = true;
+		closeButton.setVisible(false);
+	}
+	
 	private class Renderer extends DoaRenderer {
 
 		private static final long serialVersionUID = 8536737218483830680L;
-
-		private DoaVector margins = new DoaVector(120, 30);
-
+		
 		@Override
 		public void render() {
+			if(isHidden) {
+				return;
+			}
+			
 			/* Render grey bg */
 			setColor(new Color(200, 200, 200, 200));
 			fillRect(Shop.X, Shop.Y, Shop.SHOP_WIDTH, Shop.SHOP_HEIGHT);
 
 			setFont(DoaFonts.getFont("Soup").deriveFont(36f));
-
-			/* Render close button */
-			setColor(Color.YELLOW.darker());
-			fill(closeButton);
-			setColor(Color.BLACK);
-			drawString("CLOSE", Shop.X + Shop.SHOP_WIDTH - margins.x, Shop.Y + Shop.SHOP_HEIGHT - margins.y);
 		}
+	}
+
+	@Override
+	public void onNotify(Observable b) {
+		isHidden = false;
+		closeButton.setVisible(true);
+	}
+
+	@Override
+	public void onEventReceived(IEvent event) {
+		if (event instanceof WaveEnded) {
+			isHidden = false;
+			closeButton.setVisible(true);
+		}
+		
 	}
 }

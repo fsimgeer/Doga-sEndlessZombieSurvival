@@ -46,7 +46,7 @@ public class ShopTab extends DoaObject {
 				contentBounds.x + (contentBounds.width * i / colCount),
 				contentBounds.y,
 				(contentBounds.width / colCount),
-				contentBounds.height
+				contentBounds.height - 50
 			);
 			
 			ShopTabColumn col = new ShopTabColumn(data.columns.get(i), this, colBounds);
@@ -80,6 +80,8 @@ public class ShopTab extends DoaObject {
 		
 		@Override
 		public void render() {
+			if(Shop.isHidden) return;
+			
 			setColor(Color.YELLOW.darker());
 			fill(titleBounds);
 			
@@ -90,7 +92,7 @@ public class ShopTab extends DoaObject {
 
 			setFont(DoaFonts.getFont("Soup").deriveFont(36f));
 			setColor(Color.BLACK);
-			drawString(data.name.toUpperCase(), (float) titleBounds.getMinX() + 10, (float) titleBounds.getMaxY() - 10);		
+			drawString(data.name.toUpperCase(), (float) titleBounds.getMinX() + 10, (float) titleBounds.getMaxY() - 10);
 		}
 	}
 }

@@ -5,8 +5,10 @@ import static doa.engine.core.DoaGraphicsFunctions.fill;
 import static doa.engine.core.DoaGraphicsFunctions.setColor;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.Rectangle;
 
+import doa.engine.input.DoaMouse;
 import doa.engine.maths.DoaVector;
 import doa.engine.scene.DoaObject;
 import doa.engine.scene.elements.renderers.DoaRenderer;
@@ -47,6 +49,8 @@ public final class Button extends DoaObject implements IInteractableElement{
 
 		addComponent(new Script());
 		addComponent(new Renderer());
+		
+		makeStatic();
 	}
 
 	@Override
@@ -61,27 +65,15 @@ public final class Button extends DoaObject implements IInteractableElement{
 
 		@Override
 		public void tick() {
-			if (!isVisible()) { return; }
+			if (!isVisible() || !isEnabled) { return; }
 
-			if (!Button.this.isEnabled()) {
-				//currentImage = disabledImage;
-				return;
-			}
-
-			/*Rectangle area = getContentArea();
-			int mouseX = (int) DoaGraphicsFunctions.unwarpX(DoaMouse.X);
-			int mouseY = (int) DoaGraphicsFunctions.unwarpY(DoaMouse.Y);
-			if (area.contains(new Point(mouseX, mouseY))) {
-				if(currentImage == pressImage && DoaMouse.MB1_RELEASE) {
+			int mouseX = (int) DoaMouse.X;
+			int mouseY = (int) DoaMouse.Y;
+			if (contentArea.contains(new Point(mouseX, mouseY))) {
+				if(DoaMouse.MB1_RELEASE) {
 					action.execute(Button.this);
-				} else if(DoaMouse.MB1 || DoaMouse.MB1_HOLD) {
-					currentImage = pressImage;
-				} else {
-					currentImage = hoverImage;
 				}
-			} else {
-				currentImage = image;
-			}*/
+			}
 		}
 	}
 
@@ -96,7 +88,7 @@ public final class Button extends DoaObject implements IInteractableElement{
 			setColor(Color.YELLOW.darker());
 			fill(contentArea);
 			setColor(Color.BLACK);
-			drawString("CLOSE", contentArea.x, contentArea.y);
+			drawString("CLOSE", contentArea.x, contentArea.y + contentArea.height * 3f / 4f);
 		}
 	}
 

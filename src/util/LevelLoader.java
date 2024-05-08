@@ -72,7 +72,7 @@ public class LevelLoader {
 		loaded.add(level);
 
 		DoaObject hud = new DoaObject().makeStatic();
-		HUDRenderer hudr = new HUDRenderer();
+		HUDRenderer hudr = new HUDRenderer(p.Data);
 		hud.addComponent(hudr);
 		loaded.add(hud);
 		dispatcher.RegisterListener(hudr);

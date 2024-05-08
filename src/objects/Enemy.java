@@ -101,9 +101,9 @@ public class Enemy extends DoaObject {
 
 		private DoaTransform target;
 
-		public float speed = 3;
+		public float speed = 6;
 		public float dt = 0.01f;
-		public float randomRotationMax = 30;
+		public float randomRotationMax = 120;
 		public DoaVector forward = new DoaVector(1, 0); // sprite is facing right
 
 		public float size;

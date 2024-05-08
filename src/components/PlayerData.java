@@ -1,5 +1,6 @@
 package components;
 
+import doa.engine.core.DoaGame;
 import doa.engine.scene.DoaObject;
 import doa.engine.scene.elements.scripts.DoaScript;
 import doa.engine.scene.elements.scripts.DoaWASDControl;
@@ -13,7 +14,7 @@ public class PlayerData extends DoaScript {
 	private IWeapon weapon = Weapons.MachineGun;
 	private float health = 100;
 	private float healthMAX = 100;
-	private float speed = 0.25f;
+	private float speed = 2.0f;
 	private int coins = 100;
 	private int score = 0;
 	private float healthDecay = 0; // used for enemy touch, dont show in shop
@@ -62,7 +63,7 @@ public class PlayerData extends DoaScript {
 
 	@Override
 	public void tick() {
-		health -= healthDecay / 240;
+		health -= healthDecay / DoaGame.getInstance().getTargetTPS();
 		control.speed = speed;
 	}
 }

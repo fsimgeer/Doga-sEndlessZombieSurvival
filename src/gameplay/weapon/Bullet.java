@@ -73,7 +73,7 @@ public class Bullet extends DoaObject {
 					}
 				}
 			}.makeTrigger();
-			nonTriggerCollider = new DoaEllipseCollider(weapon.getDimensions().x / 2 - 1, weapon.getDimensions().y / 2 - 1).group(-1);
+			nonTriggerCollider = new DoaEllipseCollider(weapon.getDimensions().x / 2 - 1, weapon.getDimensions().y / 2 - 2).group(-1);
 		}
 		b.colliders.add(triggerCollider);
 		if (weapon.isUsingBouncingRounds()) {
